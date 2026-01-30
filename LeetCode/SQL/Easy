@@ -1,0 +1,8 @@
+175. Combine Two Tables
+select firstName, lastName, city, state from Person p left join Address a on p.personId = a.personId 
+
+181. Employees Earning More Than Their Managers
+select e1.name as Employee from Employee e1, Employee e2 where e1.managerId = e2.id and e1.salary > e2.salary
+
+584. Find Customer Referee
+select name from Customer where referee_id is null or referee_id != 2

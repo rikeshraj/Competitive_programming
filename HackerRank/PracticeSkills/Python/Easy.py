@@ -51,6 +51,14 @@ if __name__ == '__main__':
 
 
 #ListComprehensions
+result = [[i, j, k] for i in range(x+1) for j in range(y+1) for k in range(z+1) if i+j+k != n]
+#OR
+result = []
+for i in range(x+1):
+  for j in range(y+1):
+    for k in range(z+1):
+       if i+j+k!=n:
+         result.append([i, j, k])
 
 
 #RunnerUpScore
@@ -63,6 +71,20 @@ if __name__ == '__main__':
   
 
 #NestedLists
+if __name__ == '__main__':
+    records = []
+    lowest_grade = 0
+    students = []
+    scores = []
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        records.append([name, score])
+        scores.append(score)
+    second_lowest_score=sorted(list(set(scores)))[1]
+    students = [record[0] for record in records if record[1] == second_lowest_score]
+    for name in sorted(students):
+        print(name)
 
 
 #FindingPercentage
@@ -80,6 +102,27 @@ if __name__ == '__main__':
 
 
 #Lists
+if __name__ == '__main__':
+    N = int(input())
+    result = []
+    for i in range(N):
+        actions = input().split()
+        action = actions[0]
+        act = actions[1:]
+        if action == 'insert':
+            result.insert(int(act[0]), int(act[1]))
+        elif action == 'print':
+            print(result)
+        elif action == 'remove':
+            result.remove(int(act[0]))
+        elif action == 'append':
+            result.append(int(act[0]))
+        elif action == 'sort':
+            result.sort()
+        elif action =='pop':
+            result.pop()
+        elif action =='reverse':
+            result.reverse()
 
 
 #Tuples
@@ -91,8 +134,27 @@ if __name__ == '__main__':
 
 
 #SwapCase
+def swap_case(s):
+    return s.swapcase()
+#OR
+def swap_case(s):
+    result = ''
+    for character in s:
+        if character.isupper():
+            result += character.lower()
+        elif character.islower():
+            result += character.upper()
+        else: 
+            result += character
+    return result
 
 
 #StringSplitJoin
+def split_and_join(line):
+    # write your code here
+    line = line.split(" ")
+    line = "-".join(line)
+    return line
+
 
 

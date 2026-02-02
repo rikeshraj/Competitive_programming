@@ -103,3 +103,61 @@ select round(LONG_W,4) from STATION where LAT_N<137.2345 order by LAT_N desc lim
 -- Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.7780. Round your answer to 4 decimal places.
 select round(min(LAT_N),4) from STATION where LAT_N>38.7780;
 
+-- Higher Than 75 Marks
+-- Query the Name of any student in STUDENTS who scored higher than 75 Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID. 
+select Name from STUDENTS where Marks>75 order by right(Name,3), ID;
+ 
+-- Employee Names
+-- Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+select name from Employee order by name;
+ 
+-- Employee Salaries
+-- Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than $2000 per month who have been employees for less than 10 months. Sort your result by ascending employee_id. 
+select name from Employee where salary>2000 and months<10 order by employee_id asc;
+ 
+-- Type of Triangle
+/*
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+Equilateral: It's a triangle with 3 sides of equal length.
+Isosceles: It's a triangle with 3 sides of equal length.
+Scalene: It's a triangle with 3 sides of differing lengths.
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+*/
+select
+    case
+        when A+B<=C or A+C<=B or B+C<=A then 'Not A Triangle'
+        when A=B and B=C and A=C then 'Equilateral'
+        when A=B or B=C or A=C then 'Isosceles'
+        else 'Scalene'
+    end as triangle_type
+from TRIANGLES;
+
+-- Revising Aggregations - The Count Function
+-- Query a count of the number of cities in CITY having a Population larger than 100000.
+select count(NAME) from CITY where POPULATION>100000;
+ 
+-- Revising Aggregations - The Sum Function
+-- Query the total population of all cities in CITY where District is California. 
+select sum(POPULATION) from CITY where DISTRICT='California';
+ 
+-- Revising Aggregations - Averages
+-- Query the average population of all cities in CITY where District is California.
+select avg(POPULATION) from CITY where DISTRICT='California';
+ 
+-- Average Population
+-- Query the average population for all cities in CITY, rounded down to the nearest integer.
+select round(avg(POPULATION)) from CITY;
+ 
+-- Japan Population
+-- Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+select sum(POPULATION) from CITY where COUNTRYCODE='JPN';
+ 
+-- Population Density Difference
+-- Query the difference between the maximum and minimum populations in CITY.
+select max(POPULATION)-min(POPULATION) from CITY;
+ 
+-- The Blunder
+-- Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, but did not realize her keyboard's  key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary. Write a query calculating the amount of error (i.e.: actual-miscalculated average monthly salaries), and round it up to the next integer.
+
+
+-- 

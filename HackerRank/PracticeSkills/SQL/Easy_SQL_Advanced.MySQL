@@ -8,6 +8,20 @@ P(R) represents a pattern drawn by Julia in R rows. The following pattern repres
 *
 Write a query to print the pattern P(20).
 /*
+with recursive pattern_cte(row_num) as (
+  select 20 
+  union all 
+  select row_num-1 
+  from pattern_cte 
+  where row_num>1
+) 
+select repeat('* ', row_num) 
+from pattern_cte;
+-- OR
+set @temp := 21;
+select repeat('* ', @temp := @temp-1) 
+from INFORMATION_SCHEMA.TABLES
+limit 20;
 
 
 -- Draw the triangle 2
@@ -20,5 +34,18 @@ P(R) represents a pattern drawn by Julia in R rows. The following pattern repres
 * * * * *
 Write a query to print the pattern P(20).
 */
-
+set @temp := 0;
+select repeat('* ', @temp := @temp+1)
+from INFORMATION_SCHEMA.TABLES
+limit 20;
+-- OR
+with recursive pattern_cte(row_num) as (
+  select 1 
+  union all 
+  select row_num+1 
+  from pattern_cte 
+  where row_num<20
+) 
+select repeat('* ', row_num) 
+from pattern_cte;
 

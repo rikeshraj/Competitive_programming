@@ -1,4 +1,4 @@
-#WriteFunction
+#Write Function
 def is_leap(year):
   leap = False
   # Write your logic here
@@ -7,24 +7,37 @@ def is_leap(year):
   return leap
 
 
-#MinionGame
+#Minion Game
 
 
 
-#MergeTools
+#Merge Tools
 
 
-#TimeDelta
+#Time Delta
 
 
-#FindAngleABC
+#Find Angle ABC
 
 
-#NoIdea
+#No Idea
 
 
-#WordOrder
+#Word Order
 
 
-#CompressString
+#Compress String
+
+
+#Company Logo
+
+
+#Piling Up
+
+
+#Triangle Quest 2
+
+
+#Iterables and Iterators
+
 

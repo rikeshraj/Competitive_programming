@@ -132,29 +132,3 @@ if __name__ == '__main__':
     t = tuple(integer_list)
     print(hash(t))
 
-
-#SwapCase
-def swap_case(s):
-    return s.swapcase()
-#OR
-def swap_case(s):
-    result = ''
-    for character in s:
-        if character.isupper():
-            result += character.lower()
-        elif character.islower():
-            result += character.upper()
-        else: 
-            result += character
-    return result
-
-
-#StringSplitJoin
-def split_and_join(line):
-    # write your code here
-    line = line.split(" ")
-    line = "-".join(line)
-    return line
-
-
-

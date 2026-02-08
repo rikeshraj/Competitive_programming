@@ -34,7 +34,12 @@ def mutate_string(string, position, character):
 
 
 #Find a string
-
+def count_substring(string, sub_string):
+    count = 0
+    for i in range(len(string)-len(sub_string)+1):
+        if string[i : i+len(sub_string)] == sub_string:
+            count += 1
+    return count
 
 
 #String Validators
@@ -103,7 +108,14 @@ for i in range(1, number+1):
 
 
 #Alphabet Rangoli
-
+def print_rangoli(size):
+    # your code goes here
+    alphabet = string.ascii_lowercase
+    lines = []
+    for i in range(size):
+        s = "-".join(alphabet[size-1:i:-1] + alphabet[i:size])
+        lines.append(s.center(4*size-3, "-"))
+    print('\n'.join(lines[::-1]+ lines[1:]))
 
 
 #Capitalize

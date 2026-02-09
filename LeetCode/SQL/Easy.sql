@@ -10,11 +10,23 @@ select name from Customer where referee_id is null or referee_id != 2
 586. Customer Placing the Largest Number of Orders
 select customer_number from Orders group by customer_number order by count(order_number) desc limit 1
 
+595. Big Countries
+select name, population, area from World where area>=3000000 or population>=25000000;
+
 596. Classes With at Least 5 Students
 select class from Courses group by class having count(student)>4
 
 620. Not Boring Movies
 select * from Cinema where id % 2 = 1 and description != "boring" order by rating desc
+
+1148. Article Views I
+select distinct(author_id) as id from Views where viewer_id = author_id order by id asc;
+
+1683. Invalid Tweets
+select tweet_id from Tweets where char_length(content)>15;
+
+1757. Recyclable and Low Fat Products
+select product_id from Products where low_fats = 'Y' and recyclable = 'Y';
 
 1978. Employees Whose Manager Left the Company
 select employee_id from Employees where salary < 30000 and manager_id is not null and manager_id not in (select distinct employee_id from Employees) order by employee_id

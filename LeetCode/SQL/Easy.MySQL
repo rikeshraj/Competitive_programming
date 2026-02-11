@@ -17,6 +17,13 @@ join Weather w2
 on datediff(w1.recordDate, w2.recordDate) = 1 
 where w1.temperature > w2.temperature;
 
+-- 577. Employee Bonus
+select e.name, b.bonus 
+from Employee e 
+left outer join Bonus b 
+on e.empId = b.empId 
+where b.bonus<1000 or b.bonus is null;
+
 -- 584. Find Customer Referee
 select name 
 from Customer 
@@ -59,6 +66,16 @@ select distinct(author_id) as id
 from Views 
 where viewer_id = author_id 
 order by id asc;
+
+-- 1280. Students and Examinations
+select st.student_id, st.student_name, su.subject_name, count(ex.student_id) as attended_exams
+from Students st 
+cross join Subjects su 
+left join Examinations ex 
+on st.student_id = ex.student_id 
+and su.subject_name = ex.subject_name 
+group by st.student_id, st.student_name, su.subject_name 
+order by st.student_id, su.subject_name;
 
 -- 1378. Replace Employee ID With The Unique Identifier
 select u.unique_id, e.name 

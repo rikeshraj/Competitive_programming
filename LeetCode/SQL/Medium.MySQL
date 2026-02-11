@@ -1,0 +1,28 @@
+-- 570. Managers with at Least 5 Direct Reports
+select e1.name
+from Employee e1 
+join Employee e2 
+on e1.id = e2.managerId
+group by e1.id
+having count(e2.managerId)>4; 
+--OR
+select e1.name
+from Employee e1 
+join (
+    select managerId 
+    from Employee 
+    group by managerId 
+    having count(*)>4
+) e2 
+on e1.id = e2.managerId;
+--OR
+select name 
+from employee 
+where id in (
+    select managerId 
+    from Employee 
+    group by managerId 
+    having count(managerId)>4
+);
+ 
+-- 1934. Confirmation Rate

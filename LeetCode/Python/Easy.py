@@ -1,4 +1,22 @@
-217. Contains Duplicate
+#110. Balanced Binary Tree
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def check_height(node):
+            if not node:
+                return 0
+            left_height = check_height(node.left)
+            if left_height == -1:
+                return -1
+            right_height = check_height(node.right)
+            if right_height == -1:
+                return -1
+            if abs(left_height-right_height)>1:
+                return -1
+            return 1+max(left_height, right_height)
+        return check_height(root) != -1
+
+
+#217. Contains Duplicate
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         nums_len = len(nums)
@@ -15,3 +33,14 @@ class Solution:
             return True
         return False
 
+
+#3010. Divide an Array Into Subarrays With Minimum Cost I 
+class Solution:
+    def minimumCost(self, nums: List[int]) -> int:
+        first_cost = nums[0]
+        rem_nums = nums[1:]
+        rem_nums.sort()
+        second_cost = rem_nums[0]
+        third_cost = rem_nums[1]
+        min_total_cost = first_cost+second_cost+third_cost
+        return min_total_cost

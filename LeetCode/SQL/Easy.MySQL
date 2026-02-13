@@ -60,12 +60,27 @@ select p.product_name, s.year, s.price
 from Sales s 
 join Product p 
 on s.product_id = p.product_id
+
+-- 1075. Project Employees I
+select p.project_id, round(avg(e.experience_years), 2) as average_years 
+from Project p 
+left join Employee e 
+on p.employee_id = e.employee_id 
+group by p.project_id;
   
 -- 1148. Article Views I
 select distinct(author_id) as id 
 from Views 
 where viewer_id = author_id 
 order by id asc;
+
+-- 1251. Average Selling Price
+select p.product_id, ifnull(round(sum(p.price*u.units)/sum(u.units),2), 0) as average_price 
+from Prices p 
+left join UnitsSold u 
+on p.product_id = u.product_id 
+and u.purchase_date between p.start_date and p.end_date
+group by p.product_id;
 
 -- 1280. Students and Examinations
 select st.student_id, st.student_name, su.subject_name, count(ex.student_id) as attended_exams

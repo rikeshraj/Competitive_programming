@@ -10,6 +10,19 @@ from Employee e1, Employee e2
 where e1.managerId = e2.id 
 and e1.salary > e2.salary; 
 
+-- 182. Duplicate Emails
+select email 
+from Person 
+group by email 
+having count(*)>1;
+
+-- 183. Customers Who Never Order
+select c.name as Customers
+from Customers c 
+left join Orders o 
+on c.id = o.customerId 
+where o.id is null;
+
 -- 197. Rising Temperature
 select w1.id 
 from Weather w1 

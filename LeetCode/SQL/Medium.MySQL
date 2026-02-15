@@ -1,3 +1,11 @@
+-- 176. Second Highest Salary
+select max(salary) as SecondHighestSalary
+from Employee 
+where salary < (
+    select max(salary) 
+    from Employee 
+);
+
 -- 570. Managers with at Least 5 Direct Reports
 select e1.name
 from Employee e1 

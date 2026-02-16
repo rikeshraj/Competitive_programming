@@ -1,3 +1,20 @@
+// 1. Two Sum
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> map;
+        for(int i=0; i<nums.size(); i++) {
+                int com = target-nums[i];
+                if(map.count(com)) {
+                    return {map[com], i};
+                }
+            map[nums[i]] = i;
+        }
+        return {};
+    }
+};
+
+
 //9. PalindromeNumber
 class Solution {
 public:
@@ -47,6 +64,11 @@ public:
         return res;
     }
 };
+// OR
+for(int i=0; i<32; ++i) {
+    res = (res<<1) | (n&1);
+    n >>= 1;
+}
 
 
 //3010. Divide an Array Into Subarrays With Minimum Cost I 

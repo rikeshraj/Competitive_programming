@@ -16,6 +16,17 @@ class Solution:
         return check_height(root) != -1
 
 
+# 190. Reverse Bits
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        res = 0
+        for i in range(32):
+            res <<= 1
+            res |= (n&1)
+            n >>= 1
+        return res
+
+
 #217. Contains Duplicate
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:

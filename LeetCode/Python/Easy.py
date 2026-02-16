@@ -1,4 +1,15 @@
-#110. Balanced Binary Tree
+# 1. Two Sum
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        res = {}
+        for i, n in enumerate(nums):
+            com = target-n
+            if com in res:
+                return [res[com], i]
+            res[n] = i
+
+
+# 110. Balanced Binary Tree
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         def check_height(node):

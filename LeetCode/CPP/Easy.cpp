@@ -34,6 +34,21 @@ public:
 };
 
 
+// 190. Reverse Bits
+class Solution {
+public:
+    int reverseBits(int n) {
+        int res = 0;
+        for(int i=0; i<32; ++i) {
+            res <<= 1;
+            res |= (n&1);
+            n >>= 1;
+        }
+        return res;
+    }
+};
+
+
 //3010. Divide an Array Into Subarrays With Minimum Cost I 
 lass Solution {
 public:

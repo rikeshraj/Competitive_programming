@@ -71,8 +71,18 @@ for(int i=0; i<32; ++i) {
 }
 
 
-//3010. Divide an Array Into Subarrays With Minimum Cost I 
-lass Solution {
+// 217. Contains Duplicate
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> s(nums.begin(), nums.end());
+        return s.size() != nums.size();
+    }
+};
+
+
+// 3010. Divide an Array Into Subarrays With Minimum Cost I 
+class Solution {
 public:
     int minimumCost(vector<int>& nums) {
         int n = nums.size();
@@ -91,4 +101,9 @@ public:
     }
 };
 
+
+// 
+
+
+// 
 

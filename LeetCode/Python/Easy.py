@@ -9,6 +9,16 @@ class Solution:
             res[n] = i
 
 
+# 9. Palindrome Number
+def isPalindrome(self, x: int) -> bool:
+    copy = x
+    rev = 0
+    while x > 0:
+        rev = rev * 10 + x % 10
+        x //= 10
+    return copy == rev
+
+
 # 110. Balanced Binary Tree
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
@@ -38,7 +48,7 @@ class Solution:
         return res
 
 
-#217. Contains Duplicate
+# 217. Contains Duplicate
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         nums_len = len(nums)
@@ -46,6 +56,7 @@ class Solution:
         if len(nums) != nums_len:
             return True
         return False
+#OR
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         nums_copy = set()
@@ -56,7 +67,7 @@ class Solution:
         return False
 
 
-#3010. Divide an Array Into Subarrays With Minimum Cost I 
+# 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:
         first_cost = nums[0]
@@ -66,3 +77,12 @@ class Solution:
         third_cost = rem_nums[1]
         min_total_cost = first_cost+second_cost+third_cost
         return min_total_cost
+
+
+# 
+
+
+
+#
+
+

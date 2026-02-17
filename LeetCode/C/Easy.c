@@ -15,6 +15,44 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
 }
 
 
+// 9. Palindrome Number
+bool isPalindrome(int x) {
+    long copy = x;
+    long rev = 0;
+    while (x > 0) {
+        rev = rev * 10 + x % 10;
+        x /= 10;
+    }
+    return copy == rev;
+}
+
+
+// 110. Balanced Binary Tree
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
+static int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+static int abs_int(int x) {
+    return (x < 0) ? -x : x;
+}
+static int checkHeight(struct TreeNode* node) {
+    if (node == NULL) return 0;
+    int leftHeight = checkHeight(node->left);
+    if (leftHeight == -1) return -1;
+    int rightHeight = checkHeight(node->right);
+    if (rightHeight == -1) return -1;
+    if (abs_int(leftHeight - rightHeight) > 1) return -1;
+    return 1 + max(leftHeight, rightHeight);
+}
+bool isBalanced(struct TreeNode* root) {
+    return checkHeight(root) != -1;
+}
+
+
 // 190. Reverse Bits
 int reverseBits(int n) {
     int res = 0;
@@ -30,4 +68,39 @@ for(int i=0; i<32; ++i) {
     res = (res<<1) | (n&1);
     n >>= 1;
 }
+
+
+// 217. Contains Duplicate
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+bool containsDuplicate(int* nums, int numsSize) {
+    if (numsSize <= 1) return false;
+    qsort(nums, numsSize, sizeof(int), compare);
+    for (int i = 1; i < numsSize; i++) {
+        if (nums[i] == nums[i - 1]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// 3010. Divide an Array Into Subarrays With Minimum Cost I 
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+int minimumCost(int* nums, int numsSize) {
+    int firstCost = nums[0];
+    qsort(nums + 1, numsSize - 1, sizeof(int), compare);
+    int secondCost = nums[1];
+    int thirdCost = nums[2];
+    return firstCost + secondCost + thirdCost;
+}
+
+
+// 
+
+
+// 
 

@@ -67,6 +67,19 @@ class Solution:
         return False
 
 
+# 401. Binary Watch 
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
+        return [f"{h}:{m:02d}" for h in range(12) for m in range(60) if(bin(h).count('1') + bin(m).count('1')) == turnedOn]
+
+
+# 693. Binary Number with Alternating Bits
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        res = n ^ (n >> 1)
+        return (res & (res+1)) == 0
+
+
 # 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:
@@ -82,7 +95,5 @@ class Solution:
 # 
 
 
-
-#
 
 

@@ -85,6 +85,38 @@ bool containsDuplicate(int* nums, int numsSize) {
     return false;
 }
 
+// 401. Binary Watch 
+int countSetBits(int n) {
+    int count = 0; 
+    while(n>0) {
+        count += (n&1); 
+        n >>= 1; 
+    }
+    return count; 
+}
+char** readBinaryWatch(int turnedOn, int* return Size) {
+    char** res = (char**)malloc(720*sizeof(char*)); 
+    int count = 0; 
+    for(int h=0; h<12; h++) {
+        for(int m=0; m<60; m++) {
+            if(countSetBits(h) + countSetBits(m) == turnedOn) {
+                res[count] = (char*)malloc(6*sizeof(char)); 
+                sprintf(res[count], "%d:%02d", h, m); 
+                count++;
+            }
+        }
+    }
+    *returnSize = count; 
+    return res;
+}
+
+
+// 693. Binary Number with Alternating Bits
+bool hasAlternatingBits(int n) {
+    unsigned int res = (unsigned int)n ^ ((unsigned int)n >> 1);
+    return (res & (res+1)) == 0;
+}
+
 
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 int compare(const void* a, const void* b) {

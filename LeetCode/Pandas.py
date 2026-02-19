@@ -1,3 +1,25 @@
+# 183. Customers Who Never Order
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    df = customers[~customers['id'].isin(orders['customerId'])]
+    df = df[['name']].rename(columns={'name' : 'Customers'})
+    return df
+#OR 
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    ordered_id = set(orders['customerId'])
+    never_ordered = []
+    for index, row in customers.iterrows():
+        if row['id'] not in ordered_id: 
+            never_ordered.append(row['name'])
+    return pd.DataFrame({'Customers' : never_ordered})
+
+# 595. Big Countries
+def big_countries(world: pd.DataFrame) -> pd.DataFrame:
+    return world[(world['area'] >= 3000000) | (world['population'] >= 25000000)][['name', 'population', 'area']]
+ 
+# 1757. Recyclable and Low Fat Products 
+def find_products(products: pd.DataFrame) -> pd.DataFrame:
+    return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]
+
 # 2877. Create a DataFrame from List
 def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
     df = pd.DataFrame(student_data, columns = ['student_id', 'age'])

@@ -80,6 +80,23 @@ class Solution:
         return (res & (res+1)) == 0
 
 
+# 696. Count Binary Substrings 
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        previous_count = 0
+        current_count = 1
+        count = 0
+        for i in range(1, len(s)):
+            if s[i] == s[i-1]: 
+                current_count += 1 
+            else:
+                count += min(previous_count, current_count)
+                previous_count = current_count 
+                current_count = 1
+        count += min(previous_count, current_count)
+        return count
+
+
 # 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:

@@ -118,6 +118,29 @@ bool hasAlternatingBits(int n) {
 }
 
 
+/ 696. Count Binary Substrings 
+class Solution {
+public:
+    int countBinarySubstrings(string s) {
+        int previous_count = 0; 
+        int current_count = 1; 
+        int count = 0; 
+        for(int i=1; i<s.length(); i++) {
+            if(s[i] == s[i-1]) {
+                current_count++;
+            }
+            else {
+                count += min(previous_count, current_count); 
+                previous_count = current_count; 
+                current_count = 1;
+            }
+        }
+        count += min(previous_count, current_count); 
+        return count; 
+    }
+};
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 int compare(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);

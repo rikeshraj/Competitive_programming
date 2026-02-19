@@ -92,6 +92,28 @@ class Solution {
 }
 
 
+// 696. Count Binary Substrings 
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int previous_count = 0; 
+        int current_count = 1; 
+        int count = 0; 
+        for(int i=1; i<s.length(); i++) {
+            if(s.charAt(i) == s.charAt(i-1)) {
+                current_count++;
+            }
+            else {
+                count += Math.min(previous_count, current_count);
+                previous_count = current_count; 
+                current_count = 1;
+            }
+        }
+        count += Math.min(previous_count, current_count);
+        return count; 
+    }
+}
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution {
     public int minimumCost(int[] nums) {

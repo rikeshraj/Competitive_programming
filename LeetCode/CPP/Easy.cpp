@@ -107,6 +107,26 @@ public:
 };
 
 
+// 696. Count Binary Substrings 
+int countBinarySubstrings(char* s) {
+    int previous_count = 0; 
+    int current_count = 1; 
+    int count = 0; 
+    for(int i=1; i<strlen(s); i++) {
+        if(s[i] == s[i-1]) {
+            current_count++;
+        }
+        else {
+            count += (previous_count < current_count) ? previous_count : current_count; 
+            previous_count = current_count; 
+            current_count = 1;
+        }
+    }
+    count += (previous_count < current_count) ? previous_count : current_count; 
+    return count; 
+}
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution {
 public:

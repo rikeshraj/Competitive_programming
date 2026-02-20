@@ -15,7 +15,14 @@ def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFram
 # 595. Big Countries
 def big_countries(world: pd.DataFrame) -> pd.DataFrame:
     return world[(world['area'] >= 3000000) | (world['population'] >= 25000000)][['name', 'population', 'area']]
- 
+
+# 1148. Article Views I
+def article_views(views: pd.DataFrame) -> pd.DataFrame:
+    viewer = views[views['author_id'] == views['viewer_id']]
+    result = viewer[['author_id']].drop_duplicates().rename(columns={'author_id':'id'})
+    result = result.sort_values(by='id')
+    return result
+
 # 1757. Recyclable and Low Fat Products 
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]

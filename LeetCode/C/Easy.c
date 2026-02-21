@@ -141,6 +141,33 @@ public:
 };
 
 
+// 762. Prime Number of Set Bits in Binary Representation
+int countSetBits(int n) {
+    int count = 0;
+    while(n>0) {
+        n &= (n-1);
+        count++;
+    }
+    return count;
+}
+bool isPrime(int n) {
+    if(n<=1) return false; 
+    for(int i=2; i*i<=n; i++) {
+        if(n%i == 0) return false; 
+    }
+    return true;
+}
+int countPrimeSetBits(int left, int right) {
+    int primeBitsCount = 0;
+    for(int i=left; i<=right; i++) {
+        if(isPrime(countSetBits(i))) {
+            primeBitsCount++;
+        }
+    }
+    return primeBitsCount;
+}
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 int compare(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);

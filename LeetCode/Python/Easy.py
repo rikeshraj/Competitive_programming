@@ -120,6 +120,20 @@ class Solution(object):
         return count
 
 
+# 868. Binary Gap
+class Solution:
+    def binaryGap(self, n: int) -> int:
+        binary_str = bin(n)[2:]
+        max_dis = 0
+        last_index = -1
+        for i, char in enumerate(binary_str):
+            if char ==  '1':
+                if last_index != -1:
+                    max_dis = max(max_dis, i-last_index)
+                last_index = i
+        return max_dis
+
+
 # 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:

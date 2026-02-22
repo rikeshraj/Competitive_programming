@@ -27,6 +27,14 @@ def article_views(views: pd.DataFrame) -> pd.DataFrame:
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]
 
+#1873. Calculate Special Bonus
+def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
+    employees['bonus'] = employees.apply(
+        lambda x: x['salary'] if x['employee_id']%2==1 and not x['name'].startswith('M')
+        else 0, axis = 1
+    )
+    return employees[['employee_id', 'bonus']].sort_values(by='employee_id')
+
 # 2877. Create a DataFrame from List
 def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
     df = pd.DataFrame(student_data, columns = ['student_id', 'age'])

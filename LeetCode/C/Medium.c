@@ -19,3 +19,67 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     }
     return dummyHead->next;
 }
+
+
+// 1461. Check If a String Contains All Binary Codes of Size K
+bool hasAllCodes(char* s, int k) {
+    int n = strlen(s);
+    int numCodes = 1 << k;
+    if(n < numCodes+k-1) return false;
+    bool* see = (bool*)calloc(numCodes, sizeof(bool));
+    int current = 0;
+    int count = 0;
+    int mask = numCodes-1;
+    for(int i=0; i<n; i++) {
+        current = ((current << 1) & mask) | (s[i]-'0');
+        if(i >= k-1) {
+            if(!see[current]) {
+                see[current] = true;
+                count++;
+            }
+        }
+        if(count == numCodes) {
+            free(see);
+            return true;
+        }
+    }
+    free(see);
+    return false;
+}
+
+
+// 3713. Longest Balanced Substring I
+static int max_int(int a, int b) {
+    return (a > b) ? a : b;
+}
+int longestBalanced(char* s) {
+    int n = (int)strlen(s);
+    int maxLen = 0;
+    for (int i = 0; i < n; i++) {
+        int counts[26];
+        memset(counts, 0, sizeof(counts));
+        int distinctChar = 0;
+        for (int j = i; j < n; j++) {
+            int charId = s[j] - 'a';
+            if (counts[charId] == 0) {
+                distinctChar++;
+            }
+            counts[charId]++;
+            int currentLen = j - i + 1;
+            if (currentLen % distinctChar == 0) {
+                int targetCount = currentLen / distinctChar;
+                int isBalanced = 1;
+                for (int k = 0; k < 26; k++) {
+                    if (counts[k] > 0 && counts[k] != targetCount) {
+                        isBalanced = 0;
+                        break;
+                    }
+                }
+                if (isBalanced) {
+                    maxLen = max_int(maxLen, currentLen);
+                }
+            }
+        }
+    }
+    return maxLen;
+}

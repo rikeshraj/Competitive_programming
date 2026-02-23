@@ -21,12 +21,12 @@ class Solution(object):
 class Solution:
     def hasAllCodes(self, s: str, k: int) -> bool:
         if len(s) < (1 << k):
-            return false
+            return False
         see = {s[i:i+k] for i in range(len(s)-k+1)}
         return len(see) == (1 << k)
 
 
-#3713. Longest Balanced Substring I
+# 3713. Longest Balanced Substring I
 class Solution:
     def longestBalanced(self, s: str) -> int:
         n = len(s)

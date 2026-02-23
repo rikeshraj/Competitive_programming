@@ -17,6 +17,15 @@ class Solution(object):
         return dummy.next
 
 
+# 1461. Check If a String Contains All Binary Codes of Size K
+class Solution:
+    def hasAllCodes(self, s: str, k: int) -> bool:
+        if len(s) < (1 << k):
+            return false
+        see = {s[i:i+k] for i in range(len(s)-k+1)}
+        return len(see) == (1 << k)
+
+
 #3713. Longest Balanced Substring I
 class Solution:
     def longestBalanced(self, s: str) -> int:

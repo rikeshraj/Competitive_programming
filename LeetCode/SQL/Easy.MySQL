@@ -135,6 +135,11 @@ and a1.activity_type = 'start'
 and a2.activity_type = 'end'
 group by a1.machine_id;
 
+-- 1667. Fix Names in a Table
+select user_id, concat(upper(substring(name, 1, 1)), lower(substring(name, 2))) as name 
+from Users 
+order by user_id;
+
 -- 1683. Invalid Tweets
 select tweet_id 
 from Tweets 

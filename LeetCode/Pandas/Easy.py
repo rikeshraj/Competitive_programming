@@ -23,6 +23,11 @@ def article_views(views: pd.DataFrame) -> pd.DataFrame:
     result = result.sort_values(by='id')
     return result
 
+# 1527. Patients With a Condition
+def find_patients(patients: pd.DataFrame) -> pd.DataFrame:
+    result = patients[patients['conditions'].str.contains(r'(^| )DIAB1', regex=True)]
+    return result
+
 # 1757. Recyclable and Low Fat Products 
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]

@@ -23,6 +23,11 @@ def article_views(views: pd.DataFrame) -> pd.DataFrame:
     result = result.sort_values(by='id')
     return result
 
+# 1517. Find Users With Valid E-Mails
+def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
+    pat = r'^[a-zA-Z][a-zA-Z0-9._-]*@leetcode\.com$'
+    return users[users['mail'].str.match(pat)]
+
 # 1527. Patients With a Condition
 def find_patients(patients: pd.DataFrame) -> pd.DataFrame:
     result = patients[patients['conditions'].str.contains(r'(^| )DIAB1', regex=True)]

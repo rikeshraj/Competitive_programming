@@ -33,6 +33,11 @@ def find_patients(patients: pd.DataFrame) -> pd.DataFrame:
     result = patients[patients['conditions'].str.contains(r'(^| )DIAB1', regex=True)]
     return result
 
+# 1667. Fix Names in a Table
+def fix_names(users: pd.DataFrame) -> pd.DataFrame:
+    users['name'] = users['name'].str.capitalize()
+    return users.sort_values(by='user_id')
+
 # 1757. Recyclable and Low Fat Products 
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]

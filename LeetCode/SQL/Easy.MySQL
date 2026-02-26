@@ -111,6 +111,12 @@ from Employees e
 left outer join EmployeeUNI u
 on e.id = u.id;
 
+-- 1517. Find Users With Valid E-Mails
+select *
+from Users 
+where mail regexp '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\\.com$' 
+and mail like binary '%@leetcode.com';
+
 -- 1527. Patients With a Condition
 select * 
 from Patients 

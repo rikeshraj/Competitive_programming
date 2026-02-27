@@ -1,4 +1,3 @@
-
 # 176. Second Highest Salary
 def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     distinct_sal = employee['salary'].drop_duplicates().sort_values(ascending=False)
@@ -7,6 +6,18 @@ def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     else:
         second_sal = distinct_sal.iloc[1]
     return pd.DataFrame({'SecondHighestSalary': [second_sal]})
+
+# 177. Nth Highest Salary
+def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
+    high = f"getNthHighestSalary({N})"
+    df = employee["salary"].drop_duplicates().sort_values(ascending=False)
+    return pd.DataFrame({high: [df.iloc[N-1] if N > 0 and N <= len(df) else None]})
+ 
+# 570. Managers with at Least 5 Direct Reports
+def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
+    count = employee.groupby("managerId").size()
+    manager_ids = count[count>=5].index
+    return employee[employee["id"].isin(manager_ids)][["name"]]
 
 # 1934. Confirmation Rate
 def confirmation_rate(signups: pd.DataFrame, confirmations: pd.DataFrame) -> pd.DataFrame:

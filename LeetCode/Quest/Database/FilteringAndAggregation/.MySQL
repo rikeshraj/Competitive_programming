@@ -1,0 +1,28 @@
+-- Q1. Customer Placing the Largest Number of Orders
+select customer_number 
+from Orders 
+group by customer_number 
+order by count(order_number) desc limit 1;
+
+-- Q2. Classes With at Least 5 Students
+select class 
+from Courses 
+group by class 
+having count(student)>4;
+
+-- Q3. Monthly Transactions I
+select 
+    date_format(trans_date, '%Y-%m') as month, 
+    country, 
+    count(id) as trans_count, 
+    sum(if(state='approved', 1, 0)) as approved_count, 
+    sum(amount) as trans_total_amount, 
+    sum(if(state='approved', amount, 0)) as approved_total_amount
+from Transactions 
+group by month, country;
+
+-- Q4. User Activity for the Past 30 Days I
+select activity_date as day, count(distinct user_id) as active_users
+from Activity 
+where activity_date between '2019-06-28' and '2019-07-27' 
+group by activity_date;

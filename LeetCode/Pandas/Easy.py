@@ -12,9 +12,20 @@ def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFram
             never_ordered.append(row['name'])
     return pd.DataFrame({'Customers' : never_ordered})
 
+# 586. Customer Placing the Largest Number of Orders
+def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
+    counts = orders.groupby("customer_number").size()
+    top_customer = counts.idxmax()
+    return pd.DataFrame({"customer_number": [top_customer]})
+
 # 595. Big Countries
 def big_countries(world: pd.DataFrame) -> pd.DataFrame:
     return world[(world['area'] >= 3000000) | (world['population'] >= 25000000)][['name', 'population', 'area']]
+
+# 596. Classes With at Least 5 Students
+def find_classes(courses: pd.DataFrame) -> pd.DataFrame:
+    result = (courses.groupby("class", as_index=False).agg(student_count=("student", "count")).query("student_count >= 5")[["class"]])
+    return result
 
 # 1148. Article Views I
 def article_views(views: pd.DataFrame) -> pd.DataFrame:

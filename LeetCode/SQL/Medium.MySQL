@@ -6,6 +6,22 @@ where salary < (
     from Employee 
 );
 
+-- 177. Nth Highest Salary
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  declare off int;
+  set off = N - 1;
+  RETURN ( 
+    select salary 
+    from ( 
+      select distinct salary 
+      from Employee 
+      order by salary desc 
+    ) s
+    limit off, 1
+  );
+END
+
 -- 570. Managers with at Least 5 Direct Reports
 select e1.name
 from Employee e1 

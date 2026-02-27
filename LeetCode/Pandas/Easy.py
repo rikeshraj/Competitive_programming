@@ -34,6 +34,19 @@ def article_views(views: pd.DataFrame) -> pd.DataFrame:
     result = result.sort_values(by='id')
     return result
 
+# 1280. Students and Examinations
+def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, examinations: pd.DataFrame) -> pd.DataFrame:
+    base = students.merge(subjects, how="cross")
+    count = (examinations.groupby(["student_id", "subject_name"]).size().reset_index(name="attended_exams"))
+    result = (base.merge(count, on=["student_id", "subject_name"], how="left").fillna({"attended_exams": 0}))
+    result["attended_exams"] = result["attended_exams"].astype(int)
+    result = result.sort_values(["student_id", "subject_name"])
+    return result[["student_id", "student_name", "subject_name", "attended_exams"]]
+
+# 1378. Replace Employee ID With The Unique Identifier
+def replace_employee_id(employees: pd.DataFrame, employee_uni: pd.DataFrame) -> pd.DataFrame:
+    return (employees.merge(employee_uni, on="id", how="left")[["unique_id", "name"]])
+
 # 1517. Find Users With Valid E-Mails
 def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
     pat = r'^[a-zA-Z][a-zA-Z0-9._-]*@leetcode\.com$'

@@ -5,7 +5,7 @@ int compare(const void *a, const void *b) {
 char* makeLargestSpecial(char* s) {
     int len = strlen(s); 
     if(len == 0) return strdup("");
-    int count = 0, i = 0, num_spec = 0; 
+    int count = 0, i = 0, num_spec = 0;
     char** spec = malloc(len * sizeof(char*));
     for(int j=0; j<len; j++) {
         count += (s[j] == '1') ? 1 : -1;

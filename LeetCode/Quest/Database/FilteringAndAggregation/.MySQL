@@ -8,7 +8,7 @@ order by count(order_number) desc limit 1;
 select class  
 from Courses 
 group by class 
-having count(student)>4;
+having count(student)>4; 
 
 -- Q3. Monthly Transactions I
 select 

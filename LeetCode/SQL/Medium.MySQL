@@ -22,7 +22,7 @@ BEGIN
   );
 END
 
--- 570. Managers with at Least 5 Direct Reports
+-- 570. Managers with at Least 5 Direct Reports 
 select e1.name
 from Employee e1 
 join Employee e2 

@@ -6,7 +6,7 @@ on p.personId = a.personId;
 
 -- 181. Employees Earning More Than Their Managers
 select e1.name as Employee 
-from Employee e1, Employee e2 
+from Employee e1, Employee e2  
 where e1.managerId = e2.id 
 and e1.salary > e2.salary; 
 

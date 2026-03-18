@@ -11,7 +11,7 @@ select NAME from CITY where COUNTRYCODE = 'USA' and POPULATION>120000;
 select * from CITY;
 
 -- Select By ID
--- Query all columns for a city in CITY with the ID 1661.
+-- Query all columns for a city in CITY with the ID 1661. 
 select * from CITY where ID = 1661;
 
 -- Japanese Cities' Attributes

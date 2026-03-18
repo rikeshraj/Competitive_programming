@@ -1,9 +1,9 @@
-#What's Your Name
+# What's Your Name
 def print_full_name(a, b):
     print("Hello {} {}! You just delved into python.".format(a,b))
 
 
-#SwapCase
+# SwapCase
 def swap_case(s):
     return s.swapcase()
 #OR
@@ -19,7 +19,7 @@ def swap_case(s):
     return result
 
 
-#StringSplitJoin
+# StringSplitJoin
 def split_and_join(line):
     # write your code here
     line = line.split(" ")
@@ -27,7 +27,7 @@ def split_and_join(line):
     return line
 
 
-#Mutations
+# Mutations
 def mutate_string(string, position, character):
     string = string[:position] + character + string[position+1:]
     return string

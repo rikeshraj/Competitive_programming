@@ -10,7 +10,7 @@ Write a query to print the pattern P(20).
 /*
 with recursive pattern_cte(row_num) as (
   select 20 
-  union all 
+  union all  
   select row_num-1 
   from pattern_cte 
   where row_num>1

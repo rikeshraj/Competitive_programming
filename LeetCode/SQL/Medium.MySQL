@@ -5,7 +5,7 @@ where salary < (
     select max(salary) 
     from Employee 
 );
-
+ 
 -- 177. Nth Highest Salary
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN

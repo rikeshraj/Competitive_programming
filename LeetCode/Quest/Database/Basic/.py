@@ -2,7 +2,7 @@
 def combine_two_tables(person: pd.DataFrame, address: pd.DataFrame) -> pd.DataFrame:
     result = person.merge(address, on="personId", how="left")
     return result[["firstName", "lastName", "city", "state"]]
- 
+  
 # Q2. Employees Earning More Than Their Managers
 def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
     manager_salary = employee.set_index("id")["salary"]

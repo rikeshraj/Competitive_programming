@@ -9,7 +9,7 @@ select class
 from Courses 
 group by class 
 having count(student)>4; 
-
+ 
 -- Q3. Monthly Transactions I
 select 
     date_format(trans_date, '%Y-%m') as month, 

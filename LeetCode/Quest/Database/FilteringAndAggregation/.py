@@ -1,6 +1,6 @@
 # Q1. Customer Placing the Largest Number of Orders
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
-    counts = orders.groupby("customer_number").size()
+    counts = orders.groupby("customer_number").size() 
     top_customer = counts.idxmax()
     return pd.DataFrame({"customer_number": [top_customer]})
 

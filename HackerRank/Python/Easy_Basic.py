@@ -124,8 +124,6 @@ if __name__ == '__main__':
         elif action =='reverse':
             result.reverse()
 
-def aiiot():
-  print abc
 
 #Tuples
 if __name__ == '__main__':

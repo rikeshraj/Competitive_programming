@@ -54,6 +54,23 @@ public:
 };
 
 
+// 14. Longest Common Prefix
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if (strs.empty()) return "";
+        string prefix = strs[0];
+        for (int i = 1; i < (int)strs.size(); i++) {
+            while (strs[i].find(prefix) != 0) {  // prefix not at start
+                prefix.pop_back();
+                if (prefix.empty()) return "";
+            }
+        }
+        return prefix;
+    }
+};
+
+
 //110. Balanced Binary Tree
 class Solution {
 private: 

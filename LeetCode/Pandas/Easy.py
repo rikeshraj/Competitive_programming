@@ -57,6 +57,16 @@ def find_patients(patients: pd.DataFrame) -> pd.DataFrame:
     result = patients[patients['conditions'].str.contains(r'(^| )DIAB1', regex=True)]
     return result
 
+# 1633. Percentage of Users Attended a Contest
+def users_percentage(users: pd.DataFrame, register: pd.DataFrame) -> pd.DataFrame:
+    total_users = len(users)
+    if total_users == 0:
+        return pd.DataFrame(columns=["contest_id", "percentage"])
+    df = (register.groupby("contest_id")["user_id"].count().reset_index(name="registered_count"))
+    df["percentage"] = (df["registered_count"] * 100 / total_users).round(2)
+    result = (df[["contest_id", "percentage"]].sort_values(by=["percentage", "contest_id"], ascending=[False, True]).reset_index(drop=True))
+    return result
+
 # 1667. Fix Names in a Table
 def fix_names(users: pd.DataFrame) -> pd.DataFrame:
     users['name'] = users['name'].str.capitalize()

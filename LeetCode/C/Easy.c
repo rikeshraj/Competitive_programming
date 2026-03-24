@@ -56,6 +56,21 @@ int romanToInt(char* s) {
 }
 
 
+// 14. Longest Common Prefix
+char* longestCommonPrefix(char** strs, int strsSize) {
+    if (strsSize == 0) return "";
+    static char prefix[1000];
+    strcpy(prefix, strs[0]);
+    for (int i = 1; i < strsSize; i++) {
+        while (strncmp(strs[i], prefix, strlen(prefix)) != 0) {
+            prefix[strlen(prefix) - 1] = '\0';  // shrink prefix
+            if (prefix[0] == '\0') return "";
+        }
+    }
+    return prefix;
+}
+
+
 // 110. Balanced Binary Tree
 struct TreeNode {
     int val;

@@ -52,6 +52,21 @@ class Solution:
         return prefix
 
 
+# 20. Valid Parentheses
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        mapping = {")": "(", "}": "{", "]": "["}
+        for char in s:
+            if char in mapping:
+                top_element = stack.pop() if stack else '#'
+                if mapping[char] != top_element:
+                    return False
+            else:
+                stack.append(char)
+        return not stack
+
+
 # 110. Balanced Binary Tree
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:

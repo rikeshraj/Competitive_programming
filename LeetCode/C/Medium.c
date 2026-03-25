@@ -48,6 +48,36 @@ bool hasAllCodes(char* s, int k) {
 }
 
 
+// 3546. Equal Sum Grid Partition I
+bool canPartitionGrid(int** grid, int gridSize, int* gridColSize) {
+    long totalSum = 0;
+    int m = gridSize; 
+    int n = gridColSize[0];
+    for (int i=0; i<m; i++) {
+        for (int j=0; j<n; j++) {
+            totalSum += grid[i][j];
+        }
+    }
+    if (totalSum%2 != 0) return false;
+    long target = totalSum/2;
+    long currentSum = 0; 
+    for (int i=0; i<m; i++) {
+        for (int j=0; j<n; j++) {
+            currentSum += grid[i][j];
+        }
+        if (currentSum == target) return true;
+    }
+    currentSum = 0;
+    for (int j=0; j<n; j++) {
+        for (int i=0; i<m; i++) {
+            currentSum += grid[i][j];
+        }
+        if (currentSum == target) return true;
+    }
+    return false; 
+}
+
+
 // 3713. Longest Balanced Substring I
 static int max_int(int a, int b) {
     return (a > b) ? a : b;

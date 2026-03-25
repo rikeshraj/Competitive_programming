@@ -26,6 +26,28 @@ class Solution:
         return len(see) == (1 << k)
 
 
+# 3546. Equal Sum Grid Partition I
+class Solution:
+    def canPartitionGrid(self, grid: List[List[int]]) -> bool:
+        total_sum = sum(sum(row) for row in grid)
+        if total_sum%2 != 0:
+            return False
+        target = total_sum//2
+        m, n = len(grid), len(grid[0])
+        row_sum = 0
+        for i in range(m-1):
+            row_sum += sum(grid[i])
+            if row_sum == target:
+                return True
+        col_sum = 0
+        for j in range(n-1): 
+            for i in range(m):
+                col_sum += grid[i][j]
+            if col_sum == target:
+                return True
+        return False
+
+
 # 3713. Longest Balanced Substring I
 class Solution:
     def longestBalanced(self, s: str) -> int:

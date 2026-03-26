@@ -13,7 +13,7 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     }
     return NULL;
 }
-
+ 
 
 // 9. Palindrome Number
 bool isPalindrome(int x) {

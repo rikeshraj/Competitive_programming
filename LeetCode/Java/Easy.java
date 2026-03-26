@@ -12,7 +12,7 @@ class Solution {
             return new int[] {};
     }
 }
-
+ 
 // 9. Palindrome Number 
 class Solution {
     public boolean isPalindrome(int x) {

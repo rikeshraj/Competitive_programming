@@ -71,6 +71,28 @@ char* longestCommonPrefix(char** strs, int strsSize) {
 }
 
 
+// 20. Valid Parentheses
+bool isValid(char* s) {
+    int n = strlen(s);
+    if (n%2 != 0) return false;
+    char* stack = (char*)malloc(n * sizeof(char));;
+    int top = -1;
+    for (int i=0; i<n; i++) {
+        char c = s[i];
+        if (c=='(' || c=='{' || c=='[') {
+            stack[++top] = c;
+        } else {
+            if (top==-1) return false;
+            char last = stack[top--];
+            if ((c==')' && last !='(') || (c=='}' && last !='{') || (c==']' && last!='[')) {
+                return false;
+            }
+        }
+    }
+    return top==-1;
+}
+
+
 // 110. Balanced Binary Tree
 struct TreeNode {
     int val;

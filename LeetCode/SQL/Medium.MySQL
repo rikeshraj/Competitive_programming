@@ -5,7 +5,7 @@ where salary < (
     select max(salary) 
     from Employee 
 );
- 
+
 -- 177. Nth Highest Salary
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
@@ -21,7 +21,7 @@ BEGIN
     limit off, 1
   );
 END
- 
+
 -- 570. Managers with at Least 5 Direct Reports 
 select e1.name
 from Employee e1 
@@ -48,7 +48,7 @@ where id in (
     group by managerId 
     having count(managerId)>4
 );
- 
+
 -- 1934. Confirmation Rate
 select s.user_id, round(avg(if(c.action='confirmed', 1, 0)), 2) as confirmation_rate 
 from Signups s 

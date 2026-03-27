@@ -15,7 +15,7 @@ select email
 from Person 
 group by email 
 having count(*)>1;
-
+ 
 -- 183. Customers Who Never Order
 select c.name as Customers
 from Customers c 

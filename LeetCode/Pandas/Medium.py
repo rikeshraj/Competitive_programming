@@ -19,6 +19,22 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 1193. Monthly Transactions I
+def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
+    transactions["trans_date"] = pd.to_datetime(transactions["trans_date"])
+    transactions["month"] = transactions["trans_date"].dt.to_period("M").astype(str)
+    transactions["approved_count"] = (transactions["state"] == "approved").astype(int)
+    transactions["approved_amount"] = np.where(transactions["state"] == "approved", transactions["amount"], 0)
+    result = (
+        transactions.groupby(["month", "country"], dropna=False, as_index=False).agg(
+            trans_count=("id", "count"),
+            approved_count=("approved_count", "sum"),
+            trans_total_amount=("amount", "sum"),
+            approved_total_amount=("approved_amount", "sum")
+        )
+    )
+    return result
+
 # 1934. Confirmation Rate
 def confirmation_rate(signups: pd.DataFrame, confirmations: pd.DataFrame) -> pd.DataFrame:
     merged = signups.merge(confirmations, on='user_id', how='left')

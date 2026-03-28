@@ -34,6 +34,17 @@ def article_views(views: pd.DataFrame) -> pd.DataFrame:
     result = result.sort_values(by='id')
     return result
 
+# 1211. Queries Quality and Percentage
+def queries_stats(queries: pd.DataFrame) -> pd.DataFrame:
+    df = queries[queries['query_name'].notnull()].copy()
+    df['ratio'] = df['rating']/df['position']
+    df['is_poor'] = (df['rating']<3)*100
+    res = df.groupby('query_name').agg(
+        quality=('ratio', 'mean'),
+        poor_query_percentage=('is_poor', 'mean')
+    ).reset_index()
+    return res.round(2)
+
 # 1280. Students and Examinations
 def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, examinations: pd.DataFrame) -> pd.DataFrame:
     base = students.merge(subjects, how="cross")

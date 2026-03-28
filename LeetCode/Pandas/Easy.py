@@ -95,6 +95,12 @@ def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
     )
     return employees[['employee_id', 'bonus']].sort_values(by='employee_id')
 
+# 2356. Number of Unique Subjects Taught by Each Teacher
+def count_unique_subjects(teacher: pd.DataFrame) -> pd.DataFrame:
+    df = teacher.groupby('teacher_id')['subject_id'].nunique().reset_index()
+    df.columns = ['teacher_id', 'cnt']
+    return df
+
 # 2877. Create a DataFrame from List
 def createDataframe(student_data: List[List[int]]) -> pd.DataFrame:
     df = pd.DataFrame(student_data, columns = ['student_id', 'age'])

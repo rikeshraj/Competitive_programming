@@ -19,6 +19,13 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 1174. Immediate Food Delivery II
+def immediate_food_delivery(delivery: pd.DataFrame) -> pd.DataFrame:
+    first_orders = delivery.sort_values('order_date').drop_duplicates('customer_id')
+    is_immediate = (first_orders['order_date'] == first_orders['customer_pref_delivery_date'])
+    percentage = round(is_immediate.mean()*100, 2)
+    return pd.DataFrame({'immediate_percentage': [percentage]})
+
 # 1193. Monthly Transactions I
 def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
     transactions["trans_date"] = pd.to_datetime(transactions["trans_date"])

@@ -8,7 +8,7 @@ public:
                 if(map.count(com)) {
                     return {map[com], i};
                 }
-            map[nums[i]] = i;
+            map[nums[i]] = i; 
         }
         return {};
     }

@@ -12,7 +12,7 @@ with recursive pattern_cte(row_num) as (
   select 20 
   union all  
   select row_num-1 
-  from pattern_cte 
+  from pattern_cte  
   where row_num>1
 ) 
 select repeat('* ', row_num) 

@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
 #If-Else
 if __name__ == '__main__': 
-  n = int(input().strip())
+  n = int(input().strip()) 
   if n%2 == 1:
     print("Weird")
   else:

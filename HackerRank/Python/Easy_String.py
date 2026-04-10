@@ -11,7 +11,7 @@ def swap_case(s):
     result = ''
     for character in s:
         if character.isupper():
-            result += character.lower()
+            result += character.lower() 
         elif character.islower():
             result += character.upper()
         else: 

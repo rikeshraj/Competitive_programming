@@ -4,7 +4,7 @@ select firstName, lastName, city, state from Person left join Address on Person.
 select firstName, lastName, city, state from Person p left join Address a on p.personId = a.personId;
  
 -- Q2. Employees Earning More Than Their Managers
-select e1.name as Employee from Employee e1, Employee e2 where e1.managerId = e2.id and e1.salary > e2.salary;
+select e1.name as Employee from Employee e1, Employee e2 where e1.managerId = e2.id and e1.salary > e2.salary; 
  
 -- Q3. Not Boring Movies 
 select * from Cinema where id % 2 = 1 and description != "boring" order by rating desc;

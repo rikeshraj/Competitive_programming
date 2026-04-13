@@ -16,7 +16,7 @@ BEGIN
     from ( 
       select distinct salary 
       from Employee 
-      order by salary desc 
+      order by salary desc  
     ) s
     limit off, 1
   );

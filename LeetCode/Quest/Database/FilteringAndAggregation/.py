@@ -2,7 +2,7 @@
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
     counts = orders.groupby("customer_number").size() 
     top_customer = counts.idxmax()
-    return pd.DataFrame({"customer_number": [top_customer]})
+    return pd.DataFrame({"customer_number": [top_customer]}) 
 
 # Q2. Classes With at Least 5 Students
 def find_classes(courses: pd.DataFrame) -> pd.DataFrame:

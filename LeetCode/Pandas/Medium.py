@@ -6,7 +6,7 @@ def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     else:
         second_sal = distinct_sal.iloc[1]
     return pd.DataFrame({'SecondHighestSalary': [second_sal]})
-
+ 
 # 177. Nth Highest Salary
 def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
     high = f"getNthHighestSalary({N})"

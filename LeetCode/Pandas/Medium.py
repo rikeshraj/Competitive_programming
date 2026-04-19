@@ -1,7 +1,7 @@
 # 176. Second Highest Salary
 def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     distinct_sal = employee['salary'].drop_duplicates().sort_values(ascending=False)
-    if len(distinct_sal) < 2:
+    if len(distinct_sal) < 2: 
         second_sal = None
     else:
         second_sal = distinct_sal.iloc[1]

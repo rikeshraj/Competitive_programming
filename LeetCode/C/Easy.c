@@ -234,6 +234,25 @@ int countPrimeSetBits(int left, int right) {
 }
 
 
+// 2078. Two Furthest Houses With Different Colors
+int maxDistance(int* colors, int colorsSize) {
+    int dist1 = 0, dist2 = 0;
+    for (int j = colorsSize - 1; j >= 0; j--) {
+        if (colors[j] != colors[0]) {
+            dist1 = j;
+            break;
+        }
+    }
+    for (int i = 0; i < colorsSize; i++) {
+        if (colors[i] != colors[colorsSize - 1]) {
+            dist2 = (colorsSize - 1) - i;
+            break;
+        }
+    }
+    return dist1 > dist2 ? dist1 : dist2;
+}
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 int compare(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);

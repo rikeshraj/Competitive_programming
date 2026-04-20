@@ -215,6 +215,29 @@ private:
 };
 
 
+// 2078. Two Furthest Houses With Different Colors
+class Solution {
+public:
+    int maxDistance(vector<int>& colors) {
+        int n = colors.size();
+        int dist1 = 0, dist2 = 0;
+        for (int j = n - 1; j >= 0; j--) {
+            if (colors[j] != colors[0]) {
+                dist1 = j;  // distance = j - 0
+                break;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (colors[i] != colors[n - 1]) {
+                dist2 = (n - 1) - i;
+                break;
+            }
+        }
+        return max(dist1, dist2);
+    }
+};
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution {
 public:

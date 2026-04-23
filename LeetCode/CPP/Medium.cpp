@@ -38,6 +38,34 @@ public:
 };
 
 
+// 2615. Sum of Distances
+class Solution {
+public:
+    vector<long long> distance(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> res(n);
+        unordered_map<int, vector<int>> mp;
+        for (int i = 0; i < n; i++) {
+            mp[nums[i]].push_back(i);
+        }
+        for (auto &p : mp) {
+            auto &v = p.second;
+            int k = v.size();
+            vector<long long> prefix(k + 1, 0);
+            for (int i = 0; i < k; i++) {
+                prefix[i + 1] = prefix[i] + v[i];
+            }
+            for (int i = 0; i < k; i++) {
+                long long left = (long long)v[i] * i - prefix[i];
+                long long right = (prefix[k] - prefix[i + 1]) - (long long)v[i] * (k - i - 1);
+                res[v[i]] = left + right;
+            }
+        }
+        return res;
+    }
+};
+
+
 // 3546. Equal Sum Grid Partition I
 class Solution {
 public:

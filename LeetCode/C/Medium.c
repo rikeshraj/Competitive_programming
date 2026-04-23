@@ -48,6 +48,54 @@ bool hasAllCodes(char* s, int k) {
 }
 
 
+// 2615. Sum of Distances
+typedef long long ll;
+typedef struct {
+    int val;
+    int idx;
+} Pair;
+int cmp(const void* a, const void* b) {
+    Pair* p1 = (Pair*)a;
+    Pair* p2 = (Pair*)b;
+    if (p1->val != p2->val)
+        return p1->val - p2->val;
+    return p1->idx - p2->idx;
+}
+long long* distance(int* nums, int n, int* returnSize) {
+    *returnSize = n;
+    ll* res = calloc(n, sizeof(ll));
+    Pair* arr = malloc(n * sizeof(Pair));
+    for (int i = 0; i < n; i++) {
+        arr[i].val = nums[i];
+        arr[i].idx = i;
+    }
+    qsort(arr, n, sizeof(Pair), cmp);
+    int i = 0;
+    while (i < n) {
+        int j = i;
+        while (j < n && arr[j].val == arr[i].val) j++;
+        int k = j - i;
+        ll* prefix = malloc((k + 1) * sizeof(ll));
+        prefix[0] = 0;
+        for (int t = 0; t < k; t++) {
+            prefix[t + 1] = prefix[t] + arr[i + t].idx;
+        }
+        for (int t = 0; t < k; t++) {
+            ll idx = arr[i + t].idx;
+
+            ll left = idx * t - prefix[t];
+            ll right = (prefix[k] - prefix[t + 1]) - idx * (k - t - 1);
+
+            res[idx] = left + right;
+        }
+        free(prefix);
+        i = j;
+    }
+    free(arr);
+    return res;
+}
+
+
 // 3546. Equal Sum Grid Partition I
 bool canPartitionGrid(int** grid, int gridSize, int* gridColSize) {
     long totalSum = 0;

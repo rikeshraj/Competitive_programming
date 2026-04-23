@@ -26,6 +26,26 @@ class Solution:
         return len(see) == (1 << k)
 
 
+# 2615. Sum of Distances
+class Solution:
+    def distance(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        res = [0] * n
+        mp = defaultdict(list)
+        for i, v in enumerate(nums):
+            mp[v].append(i)
+        for v in mp.values():
+            k = len(v)
+            prefix = [0] * (k + 1)
+            for i in range(k):
+                prefix[i + 1] = prefix[i] + v[i]
+            for i in range(k):
+                left = v[i] * i - prefix[i]
+                right = (prefix[k] - prefix[i + 1]) - v[i] * (k - i - 1)
+                res[v[i]] = left + right
+        return res
+
+
 # 3546. Equal Sum Grid Partition I
 class Solution:
     def canPartitionGrid(self, grid: List[List[int]]) -> bool:

@@ -300,6 +300,22 @@ int maxDistance(int* colors, int colorsSize) {
 }
 
 
+// 2833. Furthest Point From Origin
+int furthestDistanceFromOrigin(char* moves) {
+    int L = 0, R = 0, U = 0;
+    for (int i = 0; moves[i]; i++) {
+        if (moves[i] == 'L') L++;
+        else if (moves[i] == 'R') R++;
+        else U++;
+    }
+    int pos = R - L;
+    if (pos >= 0)
+        return pos + U;
+    else
+        return -pos + U;
+}
+
+
 // 3010. Divide an Array Into Subarrays With Minimum Cost I 
 int compare(const void* a, const void* b) {
     return (*(int*)a - *(int*)b);

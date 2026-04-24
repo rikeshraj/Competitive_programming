@@ -240,6 +240,15 @@ class Solution:
         return max(dist1, dist2)
 
 
+# 2833. Furthest Point From Origin
+class Solution:
+    def furthestDistanceFromOrigin(self, moves: str) -> int:
+        L = moves.count('L')
+        R = moves.count('R')
+        U = moves.count('_')
+        return abs(R - L) + U
+
+
 # 3010. Divide an Array Into Subarrays With Minimum Cost I 
 class Solution:
     def minimumCost(self, nums: List[int]) -> int:

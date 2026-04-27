@@ -4,7 +4,7 @@ class Solution:
         res = {}
         for i, n in enumerate(nums):
             com = target-n
-            if com in res:
+            if com in res: 
                 return [res[com], i]
             res[n] = i
 

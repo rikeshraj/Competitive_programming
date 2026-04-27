@@ -135,6 +135,19 @@ class Solution:
         return left
 
 
+# 58. Length of Last Word
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        i = len(s) - 1
+        while i >= 0 and s[i] == ' ':
+            i -= 1
+        length = 0
+        while i >= 0 and s[i] != ' ':
+            length += 1
+            i -= 1
+        return length
+
+
 # 110. Balanced Binary Tree
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:

@@ -43,7 +43,21 @@ where e.salary = (
     select max(e2.salary)
     from Employee e2
     where e2.departmentId = e.departmentId
-);
+); #time limit exceed
+#or
+select d.name as Department,
+       e.name as Employee,
+       e.salary as Salary
+from Employee e
+join Department d
+    on e.departmentId = d.id
+join (
+    select departmentId, max(salary) as max_salary
+    from Employee
+    group by departmentId
+) mx
+on e.departmentId = mx.departmentId
+and e.salary = mx.max_salary;
 
 -- 570. Managers with at Least 5 Direct Reports 
 select e1.name

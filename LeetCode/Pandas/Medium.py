@@ -12,7 +12,19 @@ def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
     high = f"getNthHighestSalary({N})"
     df = employee["salary"].drop_duplicates().sort_values(ascending=False)
     return pd.DataFrame({high: [df.iloc[N-1] if N > 0 and N <= len(df) else None]})
- 
+
+# 184. Department Highest Salary
+def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
+    df = employee.merge(department, left_on="departmentId", right_on="id")
+    max_salary = df.groupby("name_y")["salary"].transform("max")
+    result = df[df["salary"] == max_salary]
+    result = result.rename(columns={
+        "name_y": "Department",
+        "name_x": "Employee",
+        "salary": "Salary"
+    })
+    return result[["Department", "Employee", "Salary"]]
+
 # 570. Managers with at Least 5 Direct Reports
 def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     count = employee.groupby("managerId").size()

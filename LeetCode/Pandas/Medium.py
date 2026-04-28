@@ -13,6 +13,12 @@ def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
     df = employee["salary"].drop_duplicates().sort_values(ascending=False)
     return pd.DataFrame({high: [df.iloc[N-1] if N > 0 and N <= len(df) else None]})
 
+# 178. Rank Scores
+def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
+    scores["rank"] = scores["score"].rank(method="dense", ascending=False)
+    scores = scores.sort_values(by="score", ascending=False)
+    return scores[["score", "rank"]]
+
 # 184. Department Highest Salary
 def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
     df = employee.merge(department, left_on="departmentId", right_on="id")

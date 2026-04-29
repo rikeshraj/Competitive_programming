@@ -12,6 +12,11 @@ def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFram
             never_ordered.append(row['name'])
     return pd.DataFrame({'Customers' : never_ordered})
 
+# 196. Delete Duplicate Emails
+def delete_duplicate_emails(person: pd.DataFrame) -> None:
+    person.sort_values("id", inplace=True)
+    person.drop_duplicates(subset="email", keep="first", inplace=True)
+
 # 586. Customer Placing the Largest Number of Orders
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
     counts = orders.groupby("customer_number").size()

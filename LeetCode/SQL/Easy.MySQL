@@ -23,6 +23,13 @@ left join Orders o
 on c.id = o.customerId 
 where o.id is null;
 
+-- 196. Delete Duplicate Emails
+delete p1
+from Person p1
+join Person p2
+on p1.email = p2.email
+and p1.id > p2.id;
+
 -- 197. Rising Temperature
 select w1.id 
 from Weather w1 

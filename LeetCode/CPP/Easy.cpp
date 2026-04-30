@@ -7,7 +7,7 @@ public:
                 int com = target-nums[i];
                 if(map.count(com)) {
                     return {map[com], i};
-                }
+                } 
             map[nums[i]] = i; 
         }
         return {};

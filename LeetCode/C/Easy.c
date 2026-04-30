@@ -186,6 +186,28 @@ int lengthOfLastWord(char* s) {
 }
 
 
+// 66. Plus One
+int* plusOne(int* digits, int digitsSize, int* returnSize) {
+    for (int i = digitsSize - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i]++;
+            *returnSize = digitsSize;
+            int* res = (int*)malloc(sizeof(int) * digitsSize);
+            for (int j = 0; j < digitsSize; j++)
+                res[j] = digits[j];
+            return res;
+        }
+        digits[i] = 0;
+    }
+    *returnSize = digitsSize + 1;
+    int* res = (int*)malloc(sizeof(int) * (*returnSize));
+    res[0] = 1;
+    for (int i = 1; i < *returnSize; i++)
+        res[i] = 0;
+    return res;
+}
+
+
 // 110. Balanced Binary Tree
 struct TreeNode {
     int val;

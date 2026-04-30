@@ -18,7 +18,7 @@ def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
     result = (
         transactions.groupby(["month", "country"], dropna=False, as_index=False).agg(
             trans_count=("id", "count"),
-            approved_count=("approved_count", "sum"),
+            approved_count=("approved_count", "sum"), 
             trans_total_amount=("amount", "sum"),
             approved_total_amount=("approved_amount", "sum")
         )

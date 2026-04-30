@@ -3,7 +3,7 @@ class Solution(object):
     def makeLargestSpecial(self, s):
         """
         :type s: str
-        :rtype: str
+        :rtype: str 
         """
         count = 0
         i = 0

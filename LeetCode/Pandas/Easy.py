@@ -92,6 +92,16 @@ def fix_names(users: pd.DataFrame) -> pd.DataFrame:
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]
 
+# 1795. Rearrange Products Table
+def rearrange_products_table(products: pd.DataFrame) -> pd.DataFrame:
+    df = products.melt(
+        id_vars="product_id",
+        value_vars=["store1", "store2", "store3"],
+        var_name="store",
+        value_name="price"
+    )
+    return df[df["price"].notna()].reset_index(drop=True)
+
 #1873. Calculate Special Bonus
 def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
     employees['bonus'] = employees.apply(

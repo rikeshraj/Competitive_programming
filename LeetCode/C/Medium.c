@@ -4,7 +4,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     dummyHead->val = 0;
     dummyHead->next = NULL;
     struct ListNode* current = dummyHead; 
-    int carry = 0; 
+    int carry = 0;
     while(l1 != NULL ||l2 != NULL || carry != 0) {
         int val1 = l1 != NULL ? l1->val : 0;
         int val2 = l2 != NULL ? l2->val : 0;

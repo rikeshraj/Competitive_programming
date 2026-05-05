@@ -60,6 +60,17 @@ def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
     )
     return result
 
+# 1907. Count Salary Categories
+def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:
+    low = (accounts["income"] < 20000).sum()
+    avg = ((accounts["income"] >= 20000) & (accounts["income"] <= 50000)).sum()
+    high = (accounts["income"] > 50000).sum()
+
+    return pd.DataFrame({
+        "category": ["Low Salary", "Average Salary", "High Salary"],
+        "accounts_count": [low, avg, high]
+    })
+
 # 1934. Confirmation Rate
 def confirmation_rate(signups: pd.DataFrame, confirmations: pd.DataFrame) -> pd.DataFrame:
     merged = signups.merge(confirmations, on='user_id', how='left')

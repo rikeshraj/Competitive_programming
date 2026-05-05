@@ -97,13 +97,6 @@ select
 from Transactions 
 group by month, country;
 
--- 1934. Confirmation Rate
-select s.user_id, round(avg(if(c.action='confirmed', 1, 0)), 2) as confirmation_rate 
-from Signups s 
-left join Confirmations c 
-on s.user_id = c.user_id 
-group by s.user_id;
-
 -- 1174. Immediate Food Delivery II
 select round(avg(order_date = customer_pref_delivery_date)*100, 2) as immediate_percentage 
 from Delivery 
@@ -114,11 +107,18 @@ where (customer_id, order_date) in (
 ); 
 
 -- 1907. Count Salary Categories
-select 'Low Salary' as category, COUNT(*) as accounts_count
+select 'Low Salary' as category, count(*) as accounts_count
 from Accounts where income < 20000
 union all
-select 'Average Salary', COUNT(*) 
+select 'Average Salary', count(*) 
 from Accounts where income between 20000 and 50000
 union all
-select 'High Salary', COUNT(*) 
+select 'High Salary', count(*) 
 from Accounts where income > 50000;
+
+-- 1934. Confirmation Rate
+select s.user_id, round(avg(if(c.action='confirmed', 1, 0)), 2) as confirmation_rate 
+from Signups s 
+left join Confirmations c 
+on s.user_id = c.user_id 
+group by s.user_id;

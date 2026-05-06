@@ -88,6 +88,18 @@ def fix_names(users: pd.DataFrame) -> pd.DataFrame:
     users['name'] = users['name'].str.capitalize()
     return users.sort_values(by='user_id')
 
+# 1741. Find Total Time Spent by Each Employee
+def total_time(employees: pd.DataFrame) -> pd.DataFrame:
+    df = (
+        employees
+        .assign(total_time=employees["out_time"] - employees["in_time"])
+        .groupby(["event_day", "emp_id"], as_index=False)["total_time"]
+        .sum()
+        .rename(columns={"event_day": "day"})
+        .sort_values(["emp_id", "day"])
+    )
+    return df
+
 # 1757. Recyclable and Low Fat Products 
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]

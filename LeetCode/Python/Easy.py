@@ -6,7 +6,7 @@ class Solution:
             com = target-n
             if com in res: 
                 return [res[com], i]
-            res[n] = i
+            res[n] = i 
 
 
 # 9. Palindrome Number

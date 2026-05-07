@@ -10,7 +10,7 @@ class Solution(object):
                 l1 = l1.next
             if l2:
                 carry += l2.val
-                l2 = l2.next
+                l2 = l2.next 
             current.next = ListNode(carry%10)
             carry //= 10
             current = current.next 

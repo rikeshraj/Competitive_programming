@@ -7,7 +7,7 @@ if __name__ == '__main__':
 if __name__ == '__main__': 
   n = int(input().strip()) 
   if n%2 == 1:
-    print("Weird")
+    print("Weird") 
   else:
     if n>=2 and n<6:
       print("Not Weird")

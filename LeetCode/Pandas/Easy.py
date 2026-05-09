@@ -17,6 +17,9 @@ def delete_duplicate_emails(person: pd.DataFrame) -> None:
     person.sort_values("id", inplace=True)
     person.drop_duplicates(subset="email", keep="first", inplace=True)
 
+# 511. Game Play Analysis I
+
+
 # 586. Customer Placing the Largest Number of Orders
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
     counts = orders.groupby("customer_number").size()

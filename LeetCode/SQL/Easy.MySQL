@@ -37,6 +37,11 @@ join Weather w2
 on datediff(w1.recordDate, w2.recordDate) = 1 
 where w1.temperature > w2.temperature;
 
+-- 511. Game Play Analysis I
+select player_id, min(event_date) as first_login
+from Activity
+group by player_id;
+
 -- 577. Employee Bonus
 select e.name, b.bonus 
 from Employee e 

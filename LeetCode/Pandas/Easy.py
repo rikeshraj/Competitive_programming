@@ -18,7 +18,13 @@ def delete_duplicate_emails(person: pd.DataFrame) -> None:
     person.drop_duplicates(subset="email", keep="first", inplace=True)
 
 # 511. Game Play Analysis I
-
+def game_analysis(activity: pd.DataFrame) -> pd.DataFrame:
+    return (
+        activity
+        .groupby("player_id", as_index=False)["event_date"]
+        .min()
+        .rename(columns={"event_date": "first_login"})
+    )
 
 # 586. Customer Placing the Largest Number of Orders
 def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:

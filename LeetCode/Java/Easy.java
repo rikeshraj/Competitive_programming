@@ -14,12 +14,12 @@ class Solution {
 }
   
 // 9. Palindrome Number 
-class Solution {
+class Solution { 
     public boolean isPalindrome(int x) {
         long copy = x;
         long rev = 0;
-        while (x > 0) {
-            rev = rev * 10 + x % 10;
+        while (x > 0) { 
+            rev = rev * 10 + x % 10; 
             x /= 10;
         }
         return copy == rev;

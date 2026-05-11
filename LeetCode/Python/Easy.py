@@ -1,6 +1,6 @@
 # 1. Two Sum
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums: List[int], target: int) -> List[int]: 
         res = {}
         for i, n in enumerate(nums):
             com = target-n
@@ -10,7 +10,7 @@ class Solution:
 
 
 # 9. Palindrome Number
-def isPalindrome(self, x: int) -> bool:
+def isPalindrome(self, x: int) -> bool: 
     copy = x
     rev = 0
     while x > 0:

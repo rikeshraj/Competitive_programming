@@ -11,12 +11,12 @@ public:
                 l1 = l1->next;
             }
             if (l2 != nullptr) {
-                carry += l2->val;
-                l2 = l2->next;
-            }
-            current->next = new ListNode(carry % 10);
-            carry /= 10;
-            current = current->next;
+                carry += l2->val; 
+                l2 = l2->next; 
+            } 
+            current->next = new ListNode(carry % 10); 
+            carry /= 10; 
+            current = current->next; 
         }
         return dummy.next;
     }

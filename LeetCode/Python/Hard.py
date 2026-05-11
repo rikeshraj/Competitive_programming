@@ -8,7 +8,7 @@ class Solution(object):
         count = 0
         i = 0 
         res = []
-        for j, char in enumerate(s):
+        for j, char in enumerate(s): 
             if char == '1':
                 count += 1
             else: 

@@ -72,6 +72,18 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, ex
 def replace_employee_id(employees: pd.DataFrame, employee_uni: pd.DataFrame) -> pd.DataFrame:
     return (employees.merge(employee_uni, on="id", how="left")[["unique_id", "name"]])
 
+# 1484. Group Sold Products By The Date
+def categorize_products(activities: pd.DataFrame) -> pd.DataFrame:
+    return (
+        activities
+        .groupby("sell_date")
+        .agg(
+            num_sold=("product", "nunique"),
+            products=("product", lambda x: ",".join(sorted(x.unique())))
+        )
+        .reset_index()
+    )
+
 # 1517. Find Users With Valid E-Mails
 def valid_emails(users: pd.DataFrame) -> pd.DataFrame:
     pat = r'^[a-zA-Z][a-zA-Z0-9._-]*@leetcode\.com$'

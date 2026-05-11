@@ -19,15 +19,15 @@ BEGIN
       order by salary desc  
     ) s
     limit off, 1
-  );
+  ); 
 END
 
 -- 178. Rank Scores
 select s1.score,
-       (
-           select count(distinct s2.score)
+       (  
+           select count(distinct s2.score) 
            from Scores s2
-           where s2.score >= s1.score
+           where s2.score >= s1.score 
        ) as 'rank'
 from Scores s1
 order by s1.score desc;

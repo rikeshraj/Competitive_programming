@@ -185,6 +185,14 @@ select tweet_id
 from Tweets 
 where char_length(content)>15;
 
+-- 1693. Daily Leads and Partners
+select date_id,
+       make_name,
+       count(distinct lead_id) as unique_leads,
+       count(distinct partner_id) as unique_partners
+from DailySales
+group by date_id, make_name;
+
 -- 1741. Find Total Time Spent by Each Employee
 select event_day as day, emp_id, sum(out_time-in_time) as total_time
 from Employees

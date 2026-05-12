@@ -109,6 +109,17 @@ def fix_names(users: pd.DataFrame) -> pd.DataFrame:
     users['name'] = users['name'].str.capitalize()
     return users.sort_values(by='user_id')
 
+# 1693. Daily Leads and Partners
+def daily_leads_and_partners(daily_sales: pd.DataFrame) -> pd.DataFrame:
+    return (
+        daily_sales
+        .groupby(["date_id", "make_name"], as_index=False)
+        .agg(
+            unique_leads=("lead_id", "nunique"),
+            unique_partners=("partner_id", "nunique")
+        )
+    )
+
 # 1741. Find Total Time Spent by Each Employee
 def total_time(employees: pd.DataFrame) -> pd.DataFrame:
     df = (

@@ -75,7 +75,7 @@ def replace_employee_id(employees: pd.DataFrame, employee_uni: pd.DataFrame) -> 
 # 1484. Group Sold Products By The Date
 def categorize_products(activities: pd.DataFrame) -> pd.DataFrame:
     return (
-        activities
+        activities 
         .groupby("sell_date")
         .agg(
             num_sold=("product", "nunique"),

@@ -80,6 +80,12 @@ where id % 2 = 1
 and description != "boring" 
 order by rating desc; 
 
+-- 1050. Actors and Directors Who Cooperated At Least Three Times
+select actor_id, director_id
+from ActorDirector
+group by actor_id, director_id
+having count(*) >= 3;
+
 -- 1068. Product Sales Analysis I
 select p.product_name, s.year, s.price 
 from Sales s 

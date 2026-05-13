@@ -40,7 +40,17 @@ def big_countries(world: pd.DataFrame) -> pd.DataFrame:
 def find_classes(courses: pd.DataFrame) -> pd.DataFrame:
     result = (courses.groupby("class", as_index=False).agg(student_count=("student", "count")).query("student_count >= 5")[["class"]])
     return result
- 
+
+# 1050. Actors and Directors Who Cooperated At Least Three Times
+def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
+    return (
+        actor_director
+        .groupby(["actor_id", "director_id"], as_index=False)
+        .size()
+        .query("size >= 3")
+        [["actor_id", "director_id"]]
+    )
+
 # 1148. Article Views I
 def article_views(views: pd.DataFrame) -> pd.DataFrame:
     viewer = views[views['author_id'] == views['viewer_id']]

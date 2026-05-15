@@ -41,6 +41,19 @@ def find_classes(courses: pd.DataFrame) -> pd.DataFrame:
     result = (courses.groupby("class", as_index=False).agg(student_count=("student", "count")).query("student_count >= 5")[["class"]])
     return result
 
+# 607. Sales Person
+def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    red_ids = (
+        orders
+        .merge(company, on="com_id")
+        .query("name == 'RED'")
+        ["sales_id"]
+        .unique()
+    )
+    return sales_person[
+        ~sales_person["sales_id"].isin(red_ids)
+    ][["name"]]
+
 # 1050. Actors and Directors Who Cooperated At Least Three Times
 def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
     return (

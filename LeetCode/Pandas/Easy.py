@@ -64,6 +64,14 @@ def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
         [["actor_id", "director_id"]]
     )
 
+# 1141. User Activity for the Past 30 Days I
+def user_activity(activity: pd.DataFrame) -> pd.DataFrame:
+    mask = (activity['activity_date'] > '2019-06-27') & (activity['activity_date'] <= '2019-07-27')
+    result = activity[mask]
+    result = result.groupby('activity_date')['user_id'].nunique().reset_index()
+    result.columns = ['day', 'active_users']
+    return result
+
 # 1148. Article Views I
 def article_views(views: pd.DataFrame) -> pd.DataFrame:
     viewer = views[views['author_id'] == views['viewer_id']]

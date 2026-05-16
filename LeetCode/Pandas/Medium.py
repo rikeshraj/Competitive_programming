@@ -31,6 +31,19 @@ def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) 
     })
     return result[["Department", "Employee", "Salary"]]
 
+# 550. Game Play Analysis IV
+def gameplay_analysis(activity: pd.DataFrame) -> pd.DataFrame:
+    first = activity.groupby("player_id", as_index=False)["event_date"].min()
+    merged = activity.merge(first, on="player_id")
+    matched = merged[
+        merged["event_date_x"] ==
+        merged["event_date_y"] + pd.Timedelta(days=1)
+    ]["player_id"].nunique()
+    total = activity["player_id"].nunique()
+    return pd.DataFrame({
+        "fraction": [round(matched / total, 2)]
+    })
+
 # 570. Managers with at Least 5 Direct Reports
 def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     count = employee.groupby("managerId").size()

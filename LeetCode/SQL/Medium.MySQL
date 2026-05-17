@@ -104,6 +104,30 @@ where id in (
     having count(managerId)>4
 );
 
+-- 1070. Product Sales Analysis III
+select s.product_id,
+       s.year as first_year,
+       s.quantity,
+       s.price
+from Sales s
+join (
+    select product_id,
+           min(year) as first_year
+    from Sales
+    group by product_id
+) f
+on s.product_id = f.product_id
+and s.year = f.first_year;
+
+-- 1174. Immediate Food Delivery II
+select round(avg(order_date = customer_pref_delivery_date)*100, 2) as immediate_percentage 
+from Delivery 
+where (customer_id, order_date) in (
+    select customer_id, min(order_date) 
+    from Delivery 
+    group by customer_id
+); 
+
 -- 1193. Monthly Transactions I
 select 
     date_format(trans_date, '%Y-%m') as month, 

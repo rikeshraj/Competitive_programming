@@ -50,6 +50,15 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 1070. Product Sales Analysis III
+def sales_analysis(sales: pd.DataFrame) -> pd.DataFrame:
+    first = sales.groupby("product_id")["year"].min().reset_index(name="first_year")
+    return (
+        sales.merge(first, on="product_id")
+        .query("year == first_year")
+        [["product_id", "first_year", "quantity", "price"]]
+    )
+
 # 1174. Immediate Food Delivery II
 def immediate_food_delivery(delivery: pd.DataFrame) -> pd.DataFrame:
     first_orders = delivery.sort_values('order_date').drop_duplicates('customer_id')

@@ -185,6 +185,18 @@ def calculate_special_bonus(employees: pd.DataFrame) -> pd.DataFrame:
     )
     return employees[['employee_id', 'bonus']].sort_values(by='employee_id')
 
+# 1978. Employees Whose Manager Left the Company
+def find_employees(employees: pd.DataFrame) -> pd.DataFrame:
+    manager_ids = set(employees["employee_id"])
+    return (
+        employees[
+            (employees["salary"] < 30000) &
+            (~employees["manager_id"].isin(manager_ids)) &
+            (employees["manager_id"].notna())
+        ][["employee_id"]]
+        .sort_values("employee_id")
+    )
+
 # 2356. Number of Unique Subjects Taught by Each Teacher
 def count_unique_subjects(teacher: pd.DataFrame) -> pd.DataFrame:
     df = teacher.groupby('teacher_id')['subject_id'].nunique().reset_index()

@@ -99,6 +99,20 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, ex
     result = result.sort_values(["student_id", "subject_name"])
     return result[["student_id", "student_name", "subject_name", "attended_exams"]]
 
+# 1327. List the Products Ordered in a Period
+def list_products(products: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    return (
+        orders[
+            (orders["order_date"] >= "2020-02-01") &
+            (orders["order_date"] <= "2020-02-29")
+        ]
+        .groupby("product_id", as_index=False)["unit"]
+        .sum()
+        .query("unit >= 100")
+        .merge(products, on="product_id")
+        [["product_name", "unit"]]
+    )
+
 # 1378. Replace Employee ID With The Unique Identifier
 def replace_employee_id(employees: pd.DataFrame, employee_uni: pd.DataFrame) -> pd.DataFrame:
     return (employees.merge(employee_uni, on="id", how="left")[["unique_id", "name"]])

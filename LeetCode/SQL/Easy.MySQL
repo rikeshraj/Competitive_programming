@@ -149,6 +149,16 @@ and su.subject_name = ex.subject_name
 group by st.student_id, st.student_name, su.subject_name 
 order by st.student_id, su.subject_name;
 
+-- 1327. List the Products Ordered in a Period
+select p.product_name,
+       sum(o.unit) as unit
+from Orders o
+join Products p
+on o.product_id = p.product_id
+where o.order_date between '2020-02-01' and '2020-02-29'
+group by p.product_name
+having sum(o.unit) >= 100;
+
 -- 1378. Replace Employee ID With The Unique Identifier
 select u.unique_id, e.name 
 from Employees e 

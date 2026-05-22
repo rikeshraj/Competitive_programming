@@ -227,6 +227,12 @@ select date_id,
 from DailySales
 group by date_id, make_name;
 
+-- 1729. Find Followers Count
+select user_id, count(follower_id) as followers_count
+from Followers
+group by user_id
+order by user_id;
+
 -- 1741. Find Total Time Spent by Each Employee
 select event_day as day, emp_id, sum(out_time-in_time) as total_time
 from Employees

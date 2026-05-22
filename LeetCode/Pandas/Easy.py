@@ -165,6 +165,16 @@ def daily_leads_and_partners(daily_sales: pd.DataFrame) -> pd.DataFrame:
         )
     )
 
+# 1729. Find Followers Count
+def count_followers(followers: pd.DataFrame) -> pd.DataFrame:
+    return (
+        followers
+        .groupby("user_id", as_index=False)["follower_id"]
+        .count()
+        .rename(columns={"follower_id": "followers_count"})
+        .sort_values("user_id")
+    )
+
 # 1741. Find Total Time Spent by Each Employee
 def total_time(employees: pd.DataFrame) -> pd.DataFrame:
     df = (

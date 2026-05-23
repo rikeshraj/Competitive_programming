@@ -84,6 +84,15 @@ where sales_id not in (
     where c.name = 'RED'
 );
 
+-- 619. Biggest Single Number
+select max(num) as num
+from (
+    select num
+    from MyNumbers
+    group by num
+    having count(*) = 1
+) t;
+
 -- 620. Not Boring Movies
 select * 
 from Cinema 

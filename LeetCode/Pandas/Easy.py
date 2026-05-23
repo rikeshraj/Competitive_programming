@@ -54,6 +54,28 @@ def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.D
         ~sales_person["sales_id"].isin(red_ids)
     ][["name"]]
 
+# 619. Biggest Single Number
+def biggest_single_number(my_numbers: pd.DataFrame) -> pd.DataFrame:
+    singles = (
+        my_numbers["num"]
+        .value_counts()
+        .loc[lambda x: x == 1]
+        .index
+    )
+    return pd.DataFrame({
+        "num": [singles.max() if len(singles) else None]
+    })
+
+# 620. Not Boring Movies
+def not_boring_movies(cinema):
+    return (
+        cinema[
+            (cinema["id"] % 2 == 1) &
+            (cinema["description"] != "boring")
+        ]
+        .sort_values("rating", ascending=False)
+    )
+
 # 1050. Actors and Directors Who Cooperated At Least Three Times
 def actors_and_directors(actor_director: pd.DataFrame) -> pd.DataFrame:
     return (

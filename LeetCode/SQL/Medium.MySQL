@@ -104,6 +104,14 @@ where id in (
     having count(managerId)>4
 );
 
+-- 1045. Customers Who Bought All Products
+select customer_id
+from Customer
+group by customer_id
+having count(distinct product_key) = (
+    select count(*) from Product
+);
+
 -- 1070. Product Sales Analysis III
 select s.product_id,
        s.year as first_year,

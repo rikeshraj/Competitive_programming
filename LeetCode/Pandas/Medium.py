@@ -50,6 +50,18 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 1045. Customers Who Bought All Products
+def find_customers(customer: pd.DataFrame, product: pd.DataFrame) -> pd.DataFrame:
+    total = product["product_key"].nunique()
+    return (
+        customer
+        .groupby("customer_id")["product_key"]
+        .nunique()
+        .reset_index()
+        .query("product_key == @total")
+        [["customer_id"]]
+    )
+
 # 1070. Product Sales Analysis III
 def sales_analysis(sales: pd.DataFrame) -> pd.DataFrame:
     first = sales.groupby("product_id")["year"].min().reset_index(name="first_year")

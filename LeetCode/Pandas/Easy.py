@@ -197,6 +197,28 @@ def count_followers(followers: pd.DataFrame) -> pd.DataFrame:
         .sort_values("user_id")
     )
 
+# 1731. The Number of Employees Which Report to Each Employee
+def count_employees(employees: pd.DataFrame) -> pd.DataFrame:
+    df = (
+        employees
+        .groupby("reports_to")
+        .agg(
+            reports_count=("employee_id", "count"),
+            average_age=("age", "mean")
+        )
+        .reset_index()
+    )
+    df["average_age"] = np.floor(df["average_age"] + 0.5).astype(int)
+    return (
+        df.merge(
+            employees[["employee_id", "name"]],
+            left_on="reports_to",
+            right_on="employee_id"
+        )
+        [["employee_id", "name", "reports_count", "average_age"]]
+        .sort_values("employee_id")
+    )
+
 # 1741. Find Total Time Spent by Each Employee
 def total_time(employees: pd.DataFrame) -> pd.DataFrame:
     df = (

@@ -242,6 +242,17 @@ from Followers
 group by user_id
 order by user_id;
 
+-- 1731. The Number of Employees Which Report to Each Employee
+select e.employee_id,
+       e.name,
+       count(r.employee_id) as reports_count,
+       round(avg(r.age)) as average_age
+from Employees e
+join Employees r
+on e.employee_id = r.reports_to
+group by e.employee_id, e.name
+order by e.employee_id;
+
 -- 1741. Find Total Time Spent by Each Employee
 select event_day as day, emp_id, sum(out_time-in_time) as total_time
 from Employees

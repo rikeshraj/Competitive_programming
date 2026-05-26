@@ -235,6 +235,19 @@ def total_time(employees: pd.DataFrame) -> pd.DataFrame:
 def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')][['product_id']]
 
+# 1789. Primary Department for Each Employee
+def find_primary_department(employee: pd.DataFrame) -> pd.DataFrame:
+    single = (
+        employee.groupby("employee_id")["department_id"]
+        .count()
+        .loc[lambda x: x == 1]
+        .index
+    )
+    return employee[
+        (employee["primary_flag"] == "Y") |
+        (employee["employee_id"].isin(single))
+    ][["employee_id", "department_id"]]
+
 # 1795. Rearrange Products Table
 def rearrange_products_table(products: pd.DataFrame) -> pd.DataFrame:
     df = products.melt(

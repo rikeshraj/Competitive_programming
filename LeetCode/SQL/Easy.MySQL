@@ -84,6 +84,17 @@ where sales_id not in (
     where c.name = 'RED'
 );
 
+-- 610. Triangle Judgement
+select x, y, z,
+       case
+           when x + y > z
+            and x + z > y
+            and y + z > x
+           then 'Yes'
+           else 'No'
+       end as triangle
+from Triangle;
+
 -- 619. Biggest Single Number
 select max(num) as num
 from (

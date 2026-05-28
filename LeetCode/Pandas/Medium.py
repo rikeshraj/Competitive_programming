@@ -19,6 +19,16 @@ def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
     scores = scores.sort_values(by="score", ascending=False)
     return scores[["score", "rank"]]
 
+# 180. Consecutive Numbers
+def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
+    mask = (
+        (logs["num"] == logs["num"].shift(1)) &
+        (logs["num"] == logs["num"].shift(2))
+    )
+    return pd.DataFrame({
+        "ConsecutiveNums": logs.loc[mask, "num"].drop_duplicates()
+    })
+
 # 184. Department Highest Salary
 def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
     df = employee.merge(department, left_on="departmentId", right_on="id")

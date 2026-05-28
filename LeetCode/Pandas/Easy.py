@@ -54,6 +54,18 @@ def sales_person(sales_person: pd.DataFrame, company: pd.DataFrame, orders: pd.D
         ~sales_person["sales_id"].isin(red_ids)
     ][["name"]]
 
+# 610. Triangle Judgement
+def triangle_judgement(triangle: pd.DataFrame) -> pd.DataFrame:
+    triangle["triangle"] = (
+        (
+            (triangle["x"] + triangle["y"] > triangle["z"]) &
+            (triangle["x"] + triangle["z"] > triangle["y"]) &
+            (triangle["y"] + triangle["z"] > triangle["x"])
+        )
+        .map({True: "Yes", False: "No"})
+    )
+    return triangle
+
 # 619. Biggest Single Number
 def biggest_single_number(my_numbers: pd.DataFrame) -> pd.DataFrame:
     singles = (

@@ -81,6 +81,22 @@ def sales_analysis(sales: pd.DataFrame) -> pd.DataFrame:
         [["product_id", "first_year", "quantity", "price"]]
     )
 
+# 1164. Product Price at a Given Date
+def price_at_given_date(products: pd.DataFrame) -> pd.DataFrame:
+    latest = (
+        products[products["change_date"] <= "2019-08-16"]
+        .sort_values(["product_id", "change_date"])
+        .drop_duplicates("product_id", keep="last")
+        [["product_id", "new_price"]]
+    )
+    return (
+        products[["product_id"]]
+        .drop_duplicates()
+        .merge(latest, on="product_id", how="left")
+        .fillna({"new_price": 10})
+        .rename(columns={"new_price": "price"})
+    )
+
 # 1174. Immediate Food Delivery II
 def immediate_food_delivery(delivery: pd.DataFrame) -> pd.DataFrame:
     first_orders = delivery.sort_values('order_date').drop_duplicates('customer_id')

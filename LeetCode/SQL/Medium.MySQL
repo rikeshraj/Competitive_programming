@@ -146,6 +146,27 @@ where (customer_id, order_date) in (
     group by customer_id
 ); 
 
+-- 1164. Product Price at a Given Date
+select p.product_id,
+       COALESCE(u.new_price, 10) as price
+from (
+    select distinct product_id
+    from Products
+) p
+left join (
+    select product_id,
+           new_price
+    from Products
+    where (product_id, change_date) in (
+        select product_id,
+               MAX(change_date)
+        from Products
+        where change_date <= '2019-08-16'
+        group by product_id
+    )
+) u
+on p.product_id = u.product_id;
+
 -- 1193. Monthly Transactions I
 select 
     date_format(trans_date, '%Y-%m') as month, 

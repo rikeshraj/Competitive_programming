@@ -14,7 +14,7 @@ def nth_highest_salary(employee: pd.DataFrame, N: int) -> pd.DataFrame:
     return pd.DataFrame({high: [df.iloc[N-1] if N > 0 and N <= len(df) else None]})
 
 # 178. Rank Scores
-def order_scores(scores: pd.DataFrame) -> pd.DataFrame:
+def order_scores(scores: pd.DataFrame) -> pd.DataFrame: 
     scores["rank"] = scores["score"].rank(method="dense", ascending=False)
     scores = scores.sort_values(by="score", ascending=False)
     return scores[["score", "rank"]]
@@ -119,6 +119,16 @@ def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
         )
     )
     return result
+
+# 1204. Last Person to Fit in the Bus
+def last_passenger(queue: pd.DataFrame) -> pd.DataFrame:
+    queue = queue.sort_values("turn")
+    queue["total_weight"] = queue["weight"].cumsum()
+
+    return queue.loc[
+        queue["total_weight"] <= 1000,
+        ["person_name"]
+    ].tail(1)
 
 # 1907. Count Salary Categories
 def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:

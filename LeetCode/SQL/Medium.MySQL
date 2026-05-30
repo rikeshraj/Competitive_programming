@@ -174,7 +174,7 @@ select
     count(id) as trans_count, 
     sum(if(state='approved', 1, 0)) as approved_count, 
     sum(amount) as trans_total_amount, 
-    sum(if(state='approved', amount, 0)) as approved_total_amount
+    sum(if(state='approved', amount, 0)) as approved_total_amount 
 from Transactions 
 group by month, country;
 
@@ -186,6 +186,17 @@ where (customer_id, order_date) in (
     from Delivery 
     group by customer_id
 ); 
+
+-- 1204. Last Person to Fit in the Bus
+select person_name
+from (
+    select person_name,
+           sum(weight) over (order by turn) as total_weight
+    from Queue
+) q
+where total_weight <= 1000
+order by total_weight desc
+limit 1;
 
 -- 1907. Count Salary Categories
 select 'Low Salary' as category, count(*) as accounts_count

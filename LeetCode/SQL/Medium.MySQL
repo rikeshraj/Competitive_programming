@@ -114,6 +114,17 @@ where id in (
     having count(managerId)>4
 );
 
+-- 626. Exchange Seats
+select
+    case
+        when id % 2 = 1 and id < (select max(id) from Seat) then id + 1
+        when id % 2 = 0 then id - 1
+        else id
+    end as id,
+    student
+from Seat
+order by id;
+
 -- 1045. Customers Who Bought All Products
 select customer_id
 from Customer

@@ -60,6 +60,15 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 626. Exchange Seats
+def exchange_seats(seat: pd.DataFrame) -> pd.DataFrame:
+    seat = seat.sort_values("id").copy()
+    students = seat["student"].tolist()
+    for i in range(0, len(students) - 1, 2):
+        students[i], students[i + 1] = students[i + 1], students[i]
+    seat["student"] = students
+    return seat
+
 # 1045. Customers Who Bought All Products
 def find_customers(customer: pd.DataFrame, product: pd.DataFrame) -> pd.DataFrame:
     total = product["product_key"].nunique()

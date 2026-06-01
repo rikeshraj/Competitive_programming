@@ -21,10 +21,9 @@ def swap_case(s):
 
 # StringSplitJoin
 def split_and_join(line):
-    # write your code here
     line = line.split(" ")
-    line = "-".join(line)
-    return line
+    line = "-".join(line) 
+    return line 
 
 
 # Mutations
@@ -97,14 +96,13 @@ for i in range(n-2, 0, -2):
 
 #String Formatting
 def print_formatted(number):
-# your code goes here
-width = len(bin(number)[2:])
-for i in range(1, number+1):
-  decimal = str(i).rjust(width)
-  octal = oct(i)[2:].rjust(width)
-  hexadecimal = hex(i)[2:].upper().rjust(width)
-  binary = bin(i)[2:].rjust(width)
-  print(f"{decimal} {octal} {hexadecimal} {binary}")
+  width = len(bin(number)[2:])
+  for i in range(1, number+1):
+    decimal = str(i).rjust(width)
+    octal = oct(i)[2:].rjust(width)
+    hexadecimal = hex(i)[2:].upper().rjust(width)
+    binary = bin(i)[2:].rjust(width)
+    print(f"{decimal} {octal} {hexadecimal} {binary}")
 
 
 #Alphabet Rangoli

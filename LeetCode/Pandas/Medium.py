@@ -139,6 +139,28 @@ def last_passenger(queue: pd.DataFrame) -> pd.DataFrame:
         ["person_name"]
     ].tail(1)
 
+# 1341. Movie Rating
+def movie_rating(movies: pd.DataFrame, users: pd.DataFrame, movie_rating: pd.DataFrame) -> pd.DataFrame:
+    user = (
+        movie_rating.merge(users, on="user_id")
+        .groupby("name")
+        .size()
+        .reset_index(name="cnt")
+        .sort_values(["cnt", "name"], ascending=[False, True])
+        .iloc[0]["name"]
+    )
+    movie = (
+        movie_rating[movie_rating["created_at"].dt.month.eq(2) &
+                     movie_rating["created_at"].dt.year.eq(2020)]
+        .merge(movies, on="movie_id")
+        .groupby("title")["rating"]
+        .mean()
+        .reset_index()
+        .sort_values(["rating", "title"], ascending=[False, True])
+        .iloc[0]["title"]
+    )
+    return pd.DataFrame({"results": [user, movie]})
+
 # 1907. Count Salary Categories
 def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:
     low = (accounts["income"] < 20000).sum()

@@ -139,6 +139,21 @@ def last_passenger(queue: pd.DataFrame) -> pd.DataFrame:
         ["person_name"]
     ].tail(1)
 
+# 1321. Restaurant Growth
+def restaurant_growth(customer: pd.DataFrame) -> pd.DataFrame:
+    daily = (
+        customer.groupby("visited_on", as_index=False)["amount"]
+        .sum()
+        .sort_values("visited_on")
+    )
+    daily["amount"] = daily["amount"].rolling(7).sum()
+    daily["average_amount"] = daily["amount"] / 7
+    return (
+        daily.dropna()
+        .assign(average_amount=lambda x: x["average_amount"].round(2))
+        [["visited_on", "amount", "average_amount"]]
+    )
+
 # 1341. Movie Rating
 def movie_rating(movies: pd.DataFrame, users: pd.DataFrame, movie_rating: pd.DataFrame) -> pd.DataFrame:
     user = (

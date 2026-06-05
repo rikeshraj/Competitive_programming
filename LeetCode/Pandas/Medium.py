@@ -60,6 +60,16 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 602. Friend Requests II: Who Has the Most Friends
+def most_friends(request_accepted: pd.DataFrame) -> pd.DataFrame:
+    ids = pd.concat([
+        request_accepted["requester_id"],
+        request_accepted["accepter_id"]
+    ])
+    result = ids.value_counts().reset_index()
+    result.columns = ["id", "num"]
+    return result.head(1)
+    
 # 626. Exchange Seats
 def exchange_seats(seat: pd.DataFrame) -> pd.DataFrame:
     seat = seat.sort_values("id").copy()

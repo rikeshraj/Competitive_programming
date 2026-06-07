@@ -60,6 +60,21 @@ def find_managers(employee: pd.DataFrame) -> pd.DataFrame:
     manager_ids = count[count>=5].index
     return employee[employee["id"].isin(manager_ids)][["name"]]
 
+# 585. Investments in 2016
+def find_investments(insurance: pd.DataFrame) -> pd.DataFrame:
+    duplicated_tiv2015 = insurance.groupby("tiv_2015")["pid"].transform("count") > 1
+    unique_location = (
+        insurance.groupby(["lat", "lon"])["pid"]
+        .transform("count") == 1
+    )
+    total = insurance.loc[
+        duplicated_tiv2015 & unique_location,
+        "tiv_2016"
+    ].sum()
+    return pd.DataFrame({
+        "tiv_2016": [round(total, 2)]
+    })
+
 # 602. Friend Requests II: Who Has the Most Friends
 def most_friends(request_accepted: pd.DataFrame) -> pd.DataFrame:
     ids = pd.concat([

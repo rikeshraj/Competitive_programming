@@ -23,5 +23,17 @@ def students_and_examinations(students: pd.DataFrame, subjects: pd.DataFrame, ex
     )
 
 
-# 
+# Q2. Customers Who Bought All Products
+# Write a solution to report the customer ids from the Customer table that bought all the products in the Product table.
+def find_customers(customer: pd.DataFrame, product: pd.DataFrame) -> pd.DataFrame:
+    total = product["product_key"].nunique()
+    return (
+        customer
+        .groupby("customer_id")["product_key"]
+        .nunique()
+        .reset_index()
+        .query("product_key == @total")
+        [["customer_id"]]
+    )
+
 

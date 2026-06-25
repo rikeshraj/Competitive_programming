@@ -37,3 +37,18 @@ def find_customers(customer: pd.DataFrame, product: pd.DataFrame) -> pd.DataFram
     )
 
 
+# Q3. Tree Node
+# Each node in the tree can be one of three types:
+# "Leaf": if the node is a leaf node.
+# "Root": if the node is the root of the tree.
+# "Inner": If the node is neither a leaf node nor a root node.
+# Write a solution to report the type of each node in the tree.
+# Return the result table in any order.
+def tree_node(tree: pd.DataFrame) -> pd.DataFrame:
+    parents = set(tree["p_id"].dropna())
+    result = tree[["id"]].copy()
+    result["type"] = "Leaf"
+    result.loc[tree["id"].isin(parents), "type"] = "Inner"
+    result.loc[tree["p_id"].isna(), "type"] = "Root"
+    return result
+

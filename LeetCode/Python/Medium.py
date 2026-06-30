@@ -1,5 +1,5 @@
 # 2. Add Two Numbers
-class Solution(object):
+class Solution(object): 
     def addTwoNumbers(self, l1, l2):
         dummy = ListNode(0)
         current = dummy

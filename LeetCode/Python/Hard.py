@@ -6,7 +6,7 @@ class Solution(object):
         :rtype: str  
         """ 
         count = 0 
-        i = 0 
+        i = 0  
         res = []
         for j, char in enumerate(s): 
             if char == '1':

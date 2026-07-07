@@ -10,7 +10,7 @@ class Solution(object):
         res = []
         for j, char in enumerate(s): 
             if char == '1':
-                count += 1
+                count += 1 
             else: 
                 count -= 1
             if count == 0: 

@@ -16,6 +16,22 @@ class Solution(object):
             current = current.next 
         return dummy.next
 
+# 146. LRU Cache
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = OrderedDict()
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key)
+        return self.cache[key]
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            self.cache.pop(key)
+        self.cache[key] = value
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
 
 # 1461. Check If a String Contains All Binary Codes of Size K
 class Solution:
@@ -24,7 +40,6 @@ class Solution:
             return False
         see = {s[i:i+k] for i in range(len(s)-k+1)}
         return len(see) == (1 << k)
-
 
 # 2615. Sum of Distances
 class Solution:
@@ -44,7 +59,6 @@ class Solution:
                 right = (prefix[k] - prefix[i + 1]) - v[i] * (k - i - 1)
                 res[v[i]] = left + right
         return res
-
 
 # 3546. Equal Sum Grid Partition I
 class Solution:
@@ -66,7 +80,6 @@ class Solution:
             if col_sum == target:
                 return True
         return False
-
 
 # 3713. Longest Balanced Substring I
 class Solution:

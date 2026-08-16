@@ -1,4 +1,4 @@
-# 2. Add Two Numbers
+ # 2. Add Two Numbers
 class Solution(object): 
     def addTwoNumbers(self, l1, l2):
         dummy = ListNode(0)
@@ -15,6 +15,18 @@ class Solution(object):
             carry //= 10
             current = current.next 
         return dummy.next
+
+# 56. Merge Intervals
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])
+        result = []
+        for start, end in intervals:
+            if not result or start > result[-1][1]:
+                result.append([start, end])
+            else:
+                result[-1][1] = max(result[-1][1], end)
+        return result
 
 # 146. LRU Cache
 class LRUCache:

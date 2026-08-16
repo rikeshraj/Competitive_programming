@@ -22,6 +22,26 @@ public:
     }
 }; 
 
+// 56. Merge Intervals
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> result;
+        for (auto& interval : intervals) {
+            int start = interval[0];
+            int end = interval[1];
+            if (result.empty() || start > result.back()[1]) {
+                result.push_back({start, end});
+            }
+            else {
+                result.back()[1] =
+                    max(result.back()[1], end);
+            }
+        }
+        return result;
+    }
+};
 
 // 146. LRU Cache
 class LRUCache {
@@ -57,7 +77,6 @@ public:
     }
 };
 
-
 // 1461. Check If a String Contains All Binary Codes of Size K
 class Solution {
 public:
@@ -71,7 +90,6 @@ public:
         return see.size() == (1 << k);
     }
 };
-
 
 // 2615. Sum of Distances
 class Solution {
@@ -99,7 +117,6 @@ public:
         return res;
     }
 };
-
 
 // 3546. Equal Sum Grid Partition I
 class Solution {
@@ -132,7 +149,6 @@ public:
         return false; 
     }
 };
-
 
 // 3713. Longest Balanced Substring I
 class Solution {

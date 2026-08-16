@@ -23,9 +23,20 @@ class LRUCache:
         if len(self.cache) > self.capacity:
             self.cache.popitem(last=False)
 
+
 '''
-Q2
+Q2. Merge Intervals
+Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
 '''
+def merge(self, intervals):
+        intervals.sort(key=lambda x: x[0])
+        result = []
+        for start, end in intervals:
+            if not result or start > result[-1][1]:
+                result.append([start, end])
+            else:
+                result[-1][1] = max(result[-1][1], end)
+        return result
 
 
 '''

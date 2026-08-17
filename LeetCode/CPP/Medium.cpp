@@ -77,6 +77,18 @@ public:
     }
 };
 
+// 198. House Robber
+int rob(vector<int>& nums) {
+        int prev2 = 0;
+        int prev1 = 0;
+        for (int money : nums) {
+            int current = max(prev1, prev2 + money);
+            prev2 = prev1;
+            prev1 = current;
+        }
+        return prev1;
+    }
+
 // 1461. Check If a String Contains All Binary Codes of Size K
 class Solution {
 public:

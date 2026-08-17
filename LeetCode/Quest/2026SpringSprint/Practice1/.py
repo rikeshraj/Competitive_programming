@@ -23,7 +23,6 @@ class LRUCache:
         if len(self.cache) > self.capacity:
             self.cache.popitem(last=False)
 
-
 '''
 Q2. Merge Intervals
 Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
@@ -38,8 +37,18 @@ def merge(self, intervals):
                 result[-1][1] = max(result[-1][1], end)
         return result
 
-
 '''
-Q3
+Q3. House Robber
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 '''
-
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        prev2 = 0
+        prev1 = 0
+        for money in nums:
+            current = max(prev1, prev2 + money)
+            prev2 = prev1
+            prev1 = current
+        return prev1
+        

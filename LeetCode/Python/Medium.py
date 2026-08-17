@@ -45,6 +45,17 @@ class LRUCache:
         if len(self.cache) > self.capacity:
             self.cache.popitem(last=False)
 
+# 198. House Robber
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        prev2 = 0
+        prev1 = 0
+        for money in nums:
+            current = max(prev1, prev2 + money)
+            prev2 = prev1
+            prev1 = current
+        return prev1
+
 # 1461. Check If a String Contains All Binary Codes of Size K
 class Solution:
     def hasAllCodes(self, s: str, k: int) -> bool:

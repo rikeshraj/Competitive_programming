@@ -16,6 +16,29 @@ class Solution(object):
             current = current.next 
         return dummy.next
 
+# 22. Generate Parentheses
+class Solution:
+    def generateParenthesis(self, n):
+        result = []
+        def backtrack(s, open_count, close_count):
+            if len(s) == 2 * n:
+                result.append(s)
+                return
+            if open_count < n:
+                backtrack(
+                    s + "(",
+                    open_count + 1,
+                    close_count
+                )
+            if close_count < open_count:
+                backtrack(
+                    s + ")",
+                    open_count,
+                    close_count + 1
+                )
+        backtrack("", 0, 0)
+        return result
+
 # 56. Merge Intervals
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
@@ -55,6 +78,66 @@ class Solution:
             prev2 = prev1
             prev1 = current
         return prev1
+
+# 200. Number of Islands
+ class Solution:
+    def numIslands(self, grid):
+        if not grid:
+            return 0
+        rows = len(grid)
+        cols = len(grid[0])
+        islands = 0
+        def dfs(r, c):
+            if r < 0 or r >= rows or c < 0 or c >= cols:
+                return
+            if grid[r][c] != '1':
+                return
+            grid[r][c] = '0'
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    islands += 1
+                    dfs(r, c)
+        return islands
+
+# 994. Rotting Oranges
+class Solution:
+    def orangesRotting(self, grid):
+        rows = len(grid)
+        cols = len(grid[0])
+        queue = deque()
+        fresh = 0
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 2:
+                    queue.append((r, c))
+                elif grid[r][c] == 1:
+                    fresh += 1
+        minutes = 0
+        directions = [
+            (1, 0),
+            (-1, 0),
+            (0, 1),
+            (0, -1)
+        ]
+        while queue and fresh > 0:
+            for _ in range(len(queue)):
+                r, c = queue.popleft()
+                for dr, dc in directions:
+                    nr = r + dr
+                    nc = c + dc
+                    if (0 <= nr < rows and
+                        0 <= nc < cols and
+                        grid[nr][nc] == 1):
+                        grid[nr][nc] = 2
+                        fresh -= 1
+                        queue.append((nr, nc))
+            minutes += 1
+        return minutes if fresh == 0 else -1
 
 # 1461. Check If a String Contains All Binary Codes of Size K
 class Solution:

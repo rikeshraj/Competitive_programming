@@ -104,6 +104,29 @@ class Solution:
                     dfs(r, c)
         return islands
 
+# 207. Course Schedule
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        from collections import deque
+        graph = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        for course, prerequisite in prerequisites:
+            graph[prerequisite].append(course)
+            indegree[course] += 1
+        queue = deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+        completed = 0
+        while queue:
+            course = queue.popleft()
+            completed += 1
+            for next_course in graph[course]:
+                indegree[next_course] -= 1
+                if indegree[next_course] == 0:
+                    queue.append(next_course)
+        return completed == numCourses
+
 # 994. Rotting Oranges
 class Solution:
     def orangesRotting(self, grid):
@@ -146,6 +169,21 @@ class Solution:
             return False
         see = {s[i:i+k] for i in range(len(s)-k+1)}
         return len(see) == (1 << k)
+
+# 1944. Number of Visible People in a Queue
+class Solution:
+    def canSeePersonsCount(self, heights: List[int]) -> List[int]:
+        n = len(heights)
+        result = [0] * n
+        stack = []
+        for i in range(n - 1, -1, -1):
+            while stack and heights[i] > stack[-1]:
+                stack.pop()
+                result[i] += 1
+            if stack:
+                result[i] += 1
+            stack.append(heights[i])
+        return result
 
 # 2615. Sum of Distances
 class Solution:

@@ -154,6 +154,40 @@ public:
     }
 };
 
+// 207. Course Schedule
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses);
+        vector<int> indegree(numCourses, 0);
+        for (auto& p : prerequisites) {
+            int course = p[0];
+            int prerequisite = p[1];
+            graph[prerequisite].push_back(course);
+            indegree[course]++;
+        }
+        queue<int> q;
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        int completed = 0;
+        while (!q.empty()) {
+            int course = q.front();
+            q.pop();
+            completed++;
+            for (int nextCourse : graph[course]) {
+                indegree[nextCourse]--;
+                if (indegree[nextCourse] == 0) {
+                    q.push(nextCourse);
+                }
+            }
+        }
+        return completed == numCourses;
+    }
+};
+
 // 994. Rotting Oranges
 class Solution {
 public:
@@ -210,6 +244,27 @@ public:
             if(see.size() == (1 << k)) return true;
         }
         return see.size() == (1 << k);
+    }
+};
+
+// 1944. Number of Visible People in a Queue
+class Solution {
+public:
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        int n = heights.size();
+        vector<int> result(n, 0);
+        stack<int> st;
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.empty() && heights[i] > st.top()) {
+                st.pop();
+                result[i]++;
+            }
+            if (!st.empty()) {
+                result[i]++;
+            }
+            st.push(heights[i]);
+        }
+        return result;
     }
 };
 

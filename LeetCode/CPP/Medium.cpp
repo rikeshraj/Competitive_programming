@@ -104,6 +104,25 @@ public:
     }
 };
 
+// 152. Maximum Product Subarray
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int currMax = nums[0];
+        int currMin = nums[0];
+        int result = nums[0];
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] < 0) {
+                swap(currMax, currMin);
+            }
+            currMax = max(nums[i], currMax * nums[i]);
+            currMin = min(nums[i], currMin * nums[i]);
+            result = max(result, currMax);
+        }
+        return result;
+    }
+};
+
 // 198. House Robber
 class Solution {
 public:
@@ -188,6 +207,26 @@ public:
     }
 };
 
+// 238. Product of Array Except Self
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> answer(n, 1);
+        int prefix = 1;
+        for (int i = 0; i < n; i++) {
+            answer[i] = prefix;
+            prefix *= nums[i];
+        }
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            answer[i] *= suffix;
+            suffix *= nums[i];
+        }
+        return answer;
+    }
+};
+
 // 994. Rotting Oranges
 class Solution {
 public:
@@ -232,6 +271,47 @@ public:
     }
 };
 
+// 1386. Cinema Seat Allocation
+class Solution {
+public:
+    int maxNumberOfFamilies(int n, vector<vector<int>>& reservedSeats) {
+        unordered_map<int, unordered_set<int>> reserved;
+        for (auto& seat : reservedSeats) {
+            reserved[seat[0]].insert(seat[1]);
+        }
+        int result = (n - reserved.size()) * 2;
+        for (auto& [row, seats] : reserved) {
+            bool left = true;
+            bool middle = true;
+            bool right = true;
+            for (int s = 2; s <= 5; s++) {
+                if (seats.count(s)) {
+                    left = false;
+                    break;
+                }
+            }
+            for (int s = 4; s <= 7; s++) {
+                if (seats.count(s)) {
+                    middle = false;
+                    break;
+                }
+            }
+            for (int s = 6; s <= 9; s++) {
+                if (seats.count(s)) {
+                    right = false;
+                    break;
+                }
+            }
+            if (left && right) {
+                result += 2;
+            }
+            else if (left || middle || right) {
+                result += 1;
+            }
+        }
+        return result;
+    }
+};
 
 // 1461. Check If a String Contains All Binary Codes of Size K
 class Solution {

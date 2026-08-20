@@ -68,6 +68,20 @@ class LRUCache:
         if len(self.cache) > self.capacity:
             self.cache.popitem(last=False)
 
+# 152. Maximum Product Subarray
+class Solution:
+    def maxProduct(self, nums):
+        curr_max = nums[0]
+        curr_min = nums[0]
+        result = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] < 0:
+                curr_max, curr_min = curr_min, curr_max
+            curr_max = max(nums[i], curr_max * nums[i])
+            curr_min = min(nums[i], curr_min * nums[i])
+            result = max(result, curr_max)
+        return result
+
 # 198. House Robber
 class Solution:
     def rob(self, nums: List[int]) -> int:
@@ -127,6 +141,21 @@ class Solution:
                     queue.append(next_course)
         return completed == numCourses
 
+# 238. Product of Array Except Self
+class Solution:
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        answer = [1] * n
+        prefix = 1
+        for i in range(n):
+            answer[i] = prefix
+            prefix *= nums[i]
+        suffix = 1
+        for i in range(n - 1, -1, -1):
+            answer[i] *= suffix
+            suffix *= nums[i]
+        return answer
+
 # 994. Rotting Oranges
 class Solution:
     def orangesRotting(self, grid):
@@ -161,6 +190,24 @@ class Solution:
                         queue.append((nr, nc))
             minutes += 1
         return minutes if fresh == 0 else -1
+
+# 1386. Cinema Seat Allocation
+class Solution:
+    def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:
+        reserved = {}
+        for row, seat in reservedSeats:
+            reserved.setdefault(row, set()).add(seat)
+        result = (n - len(reserved)) * 2
+        for seats in reserved.values():
+            count = 0
+            if not any(s in seats for s in [2, 3, 4, 5]):
+                count += 1
+            if not any(s in seats for s in [6, 7, 8, 9]):
+                count += 1
+            if count == 0 and not any(s in seats for s in [4, 5, 6, 7]):
+                count = 1
+            result += count
+        return result
 
 # 1461. Check If a String Contains All Binary Codes of Size K
 class Solution:

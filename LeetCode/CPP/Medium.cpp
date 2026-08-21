@@ -227,6 +227,25 @@ public:
     }
 };
 
+// 560. Subarray Sum Equals K
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> freq;
+        freq[0] = 1;
+        int prefixSum = 0;
+        int count = 0;
+        for (int num : nums) {
+            prefixSum += num;
+            if (freq.find(prefixSum - k) != freq.end()) {
+                count += freq[prefixSum - k];
+            }
+            freq[prefixSum]++;
+        }
+        return count;
+    }
+};
+
 // 994. Rotting Oranges
 class Solution {
 public:
@@ -345,6 +364,28 @@ public:
             st.push(heights[i]);
         }
         return result;
+    }
+};
+
+// 2571. Minimum Operations to Reduce an Integer to 0
+class Solution {
+public:
+    int minOperations(int n) {
+        int ans = 0;
+        while (n > 0) {
+            if ((n & 3) == 3) {
+                n += 1;
+                ans++;
+            }
+            else if (n & 1) {
+                n -= 1;
+                ans++;
+            }
+            else {
+                n >>= 1;
+            }
+        }
+        return ans;
     }
 };
 

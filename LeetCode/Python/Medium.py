@@ -156,6 +156,19 @@ class Solution:
             suffix *= nums[i]
         return answer
 
+# 560. Subarray Sum Equals K
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        prefix_sum = 0
+        count = 0
+        freq = {0: 1}
+        for num in nums:
+            prefix_sum += num
+            if prefix_sum - k in freq:
+                count += freq[prefix_sum - k]
+            freq[prefix_sum] = freq.get(prefix_sum, 0) + 1
+        return count
+
 # 994. Rotting Oranges
 class Solution:
     def orangesRotting(self, grid):
@@ -231,6 +244,21 @@ class Solution:
                 result[i] += 1
             stack.append(heights[i])
         return result
+
+# 2571. Minimum Operations to Reduce an Integer to 0
+class Solution:
+    def minOperations(self, n: int) -> int:
+        ans = 0
+        while n > 0:
+            if (n & 3) == 3:
+                n += 1
+                ans += 1
+            elif n & 1:
+                n -= 1
+                ans += 1
+            else:
+                n >>= 1
+        return ans
 
 # 2615. Sum of Distances
 class Solution:

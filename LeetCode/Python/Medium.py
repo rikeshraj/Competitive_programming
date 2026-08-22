@@ -204,6 +204,48 @@ class Solution:
             minutes += 1
         return minutes if fresh == 0 else -1
 
+# 1202. Remove All Adjacent Duplicates in String II
+class Solution:
+    def removeDuplicates(self, s: str, k: int) -> str:
+        stack = []
+        for c in s:
+            if stack and stack[-1][0] == c:
+                stack[-1][1] += 1
+                if stack[-1][1] == k:
+                    stack.pop()
+            else:
+                stack.append([c, 1])
+        return ''.join(c * count for c, count in stack)
+
+# 1339. Maximum Product of Splitted Binary Tree
+class Solution:
+    def maxProduct(self, root: Optional[TreeNode]) -> int:
+        MOD = 10**9 + 7
+        def get_sum(node):
+            if not node:
+                return 0
+            return (
+                node.val
+                + get_sum(node.left)
+                + get_sum(node.right)
+            )
+        total = get_sum(root)
+        ans = 0
+        def dfs(node):
+            nonlocal ans
+            if not node:
+                return 0
+            subtree_sum = (
+                node.val
+                + dfs(node.left)
+                + dfs(node.right)
+            )
+            product = subtree_sum * (total - subtree_sum)
+            ans = max(ans, product)
+            return subtree_sum
+        dfs(root)
+        return ans % MOD
+
 # 1386. Cinema Seat Allocation
 class Solution:
     def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:

@@ -290,6 +290,63 @@ public:
     }
 };
 
+// 1202. Remove All Adjacent Duplicates in String II
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        vector<pair<char, int>> stack;
+        for (char c : s) {
+            if (!stack.empty() && stack.back().first == c) {
+                stack.back().second++;
+                if (stack.back().second == k) {
+                    stack.pop_back();
+                }
+            }
+            else {
+                stack.push_back({c, 1});
+            }
+        }
+        string result;
+        for (auto& [c, count] : stack) {
+            result.append(count, c);
+        }
+        return result;
+    }
+};
+
+// 1339. Maximum Product of Splitted Binary Tree
+class Solution {
+public:
+    using ll = long long;
+    ll totalSum = 0;
+    ll ans = 0;
+    ll getSum(TreeNode* node) {
+        if (!node)
+            return 0;
+        return node->val
+             + getSum(node->left)
+             + getSum(node->right);
+    }
+    ll dfs(TreeNode* node) {
+        if (!node)
+            return 0;
+        ll subtreeSum =
+            node->val
+            + dfs(node->left)
+            + dfs(node->right);
+        ll product =
+            subtreeSum * (totalSum - subtreeSum);
+        ans = max(ans, product);
+        return subtreeSum;
+    }
+    int maxProduct(TreeNode* root) {
+        const ll MOD = 1000000007;
+        totalSum = getSum(root);
+        dfs(root);
+        return ans % MOD;
+    }
+};
+
 // 1386. Cinema Seat Allocation
 class Solution {
 public:

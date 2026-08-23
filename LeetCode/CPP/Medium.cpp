@@ -49,6 +49,24 @@ public:
     }
 };
 
+// 49. Group Anagrams
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> groups;
+        for (string s : strs) {
+            string key = s;
+            sort(key.begin(), key.end());
+            groups[key].push_back(s);
+        }
+        vector<vector<string>> result;
+        for (auto& [key, words] : groups) {
+            result.push_back(words);
+        }
+        return result;
+    }
+};
+
 // 56. Merge Intervals
 class Solution {
 public:
@@ -309,6 +327,38 @@ public:
         string result;
         for (auto& [c, count] : stack) {
             result.append(count, c);
+        }
+        return result;
+    }
+};
+
+// 1249. Minimum Remove to Make Valid Parentheses
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        vector<int> stack;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') {
+                stack.push_back(i);
+            }
+            else if (s[i] == ')') {
+                if (!stack.empty()) {
+                    stack.pop_back();
+                }
+                else {
+                    s[i] = '*';
+                }
+            }
+        }
+        while (!stack.empty()) {
+            s[stack.back()] = '*';
+            stack.pop_back();
+        }
+        string result;
+        for (char ch : s) {
+            if (ch != '*') {
+                result += ch;
+            }
         }
         return result;
     }

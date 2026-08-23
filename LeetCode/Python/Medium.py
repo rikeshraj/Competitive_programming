@@ -39,6 +39,17 @@ class Solution:
         backtrack("", 0, 0)
         return result
 
+# 49. Group Anagrams
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        groups = {}
+        for s in strs:
+            key = ''.join(sorted(s))
+            if key not in groups:
+                groups[key] = []
+            groups[key].append(s)
+        return list(groups.values())
+
 # 56. Merge Intervals
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
@@ -216,6 +227,23 @@ class Solution:
             else:
                 stack.append([c, 1])
         return ''.join(c * count for c, count in stack)
+
+# 1249. Minimum Remove to Make Valid Parentheses
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        s = list(s)
+        stack = []
+        for i, ch in enumerate(s):
+            if ch == '(':
+                stack.append(i)
+            elif ch == ')':
+                if stack:
+                    stack.pop()
+                else:
+                    s[i] = ''
+        while stack:
+            s[stack.pop()] = ''
+        return ''.join(s)
 
 # 1339. Maximum Product of Splitted Binary Tree
 class Solution:

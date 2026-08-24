@@ -76,6 +76,73 @@ public:
     }
 };
 
+// 42. Trapping Rain Water
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int left = 0;
+        int right = height.size() - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int water = 0;
+        while (left < right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= leftMax) {
+                    leftMax = height[left];
+                }
+                else {
+                    water += leftMax - height[left];
+                }
+                left++;
+            }
+            else {
+                if (height[right] >= rightMax) {
+                    rightMax = height[right];
+                }
+                else {
+                    water += rightMax - height[right];
+                }
+                right--;
+            }
+        }
+        return water;
+    }
+};
+
+// 85. Maximal Rectangle
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if (matrix.empty() || matrix[0].empty())
+            return 0;
+        int cols = matrix[0].size();
+        vector<int> heights(cols, 0);
+        int maxArea = 0;
+        for (auto& row : matrix) {
+            for (int j = 0; j < cols; j++) {
+                if (row[j] == '1')
+                    heights[j]++;
+                else
+                    heights[j] = 0;
+            }
+            stack<int> st;
+            st.push(-1);
+            for (int i = 0; i <= cols; i++) {
+                int current = (i == cols) ? 0 : heights[i];
+                while (st.top() != -1 &&
+                       heights[st.top()] > current) {
+                    int h = heights[st.top()];
+                    st.pop();
+                    int width = i - st.top() - 1;
+                    maxArea = max(maxArea, h * width);
+                }
+                st.push(i);
+            }
+        }
+        return maxArea;
+    }
+};
+
 // 761. Special Binary String
 class Solution {
 public:

@@ -215,6 +215,22 @@ class Solution:
             minutes += 1
         return minutes if fresh == 0 else -1
 
+# 1004. Max Consecutive Ones III
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        left = 0
+        zeros = 0
+        max_len = 0
+        for right in range(len(nums)):
+            if nums[right] == 0:
+                zeros += 1
+            while zeros > k:
+                if nums[left] == 0:
+                    zeros -= 1
+                left += 1
+            max_len = max(max_len, right - left + 1)
+        return max_len
+
 # 1202. Remove All Adjacent Duplicates in String II
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:

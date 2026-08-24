@@ -47,6 +47,53 @@ class Solution:
                 )
         return dummy.next
 
+# 42. Trapping Rain Water
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) - 1
+        left_max = 0
+        right_max = 0
+        water = 0
+        while left < right:
+            if height[left] <= height[right]:
+                if height[left] >= left_max:
+                    left_max = height[left]
+                else:
+                    water += left_max - height[left]
+                left += 1
+            else:
+                if height[right] >= right_max:
+                    right_max = height[right]
+                else:
+                    water += right_max - height[right]
+                right -= 1
+        return water
+
+# 85. Maximal Rectangle
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        if not matrix or not matrix[0]:
+            return 0
+        cols = len(matrix[0])
+        heights = [0] * cols
+        max_area = 0
+        for row in matrix:
+            for j in range(cols):
+                if row[j] == '1':
+                    heights[j] += 1
+                else:
+                    heights[j] = 0
+            stack = [-1]
+            for i in range(cols + 1):
+                current = heights[i] if i < cols else 0
+                while stack[-1] != -1 and heights[stack[-1]] > current:
+                    h = heights[stack.pop()]
+                    width = i - stack[-1] - 1
+                    max_area = max(max_area, h * width)
+                stack.append(i)
+        return max_area
+
 # 761. Special Binary String
 class Solution(object):
     def makeLargestSpecial(self, s):

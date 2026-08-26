@@ -94,6 +94,21 @@ class Solution:
                 stack.append(i)
         return max_area
 
+# 239. Sliding Window Maximum
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        dq = deque()
+        result = []
+        for i in range(len(nums)):
+            while dq and dq[0] <= i - k:
+                dq.popleft()
+            while dq and nums[dq[-1]] <= nums[i]:
+                dq.pop()
+            dq.append(i)
+            if i >= k - 1:
+                result.append(nums[dq[0]])
+        return result
+
 # 761. Special Binary String
 class Solution(object):
     def makeLargestSpecial(self, s):
@@ -114,3 +129,32 @@ class Solution(object):
                 i = j+1
         res.sort(reverse = True)
         return "".join(res)
+
+# 2858. Minimum Edge Reversals So Every Node Is Reachable
+class Solution:
+    def minEdgeReversals(self, n: int, edges: List[List[int]]) -> List[int]:
+        graph = [[] for _ in range(n)]
+        for u, v in edges:
+            graph[u].append((v, 0))
+            graph[v].append((u, 1))
+        ans = [0] * n
+        def dfs(node, parent):
+            total = 0
+            for nei, cost in graph[node]:
+                if nei == parent:
+                    continue
+                total += cost
+                total += dfs(nei, node)
+            return total
+        ans[0] = dfs(0, -1)
+        def reroot(node, parent):
+            for nei, cost in graph[node]:
+                if nei == parent:
+                    continue
+                if cost == 0:
+                    ans[nei] = ans[node] + 1
+                else:
+                    ans[nei] = ans[node] - 1
+                reroot(nei, node)
+        reroot(0, -1)
+        return ans

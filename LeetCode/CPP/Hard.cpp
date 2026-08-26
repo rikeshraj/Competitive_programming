@@ -143,6 +143,29 @@ public:
     }
 };
 
+// 239. Sliding Window Maximum
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        deque<int> dq;
+        vector<int> result;
+        for (int i = 0; i < nums.size(); i++) {
+            while (!dq.empty() && dq.front() <= i - k) {
+                dq.pop_front();
+            }
+            while (!dq.empty() &&
+                   nums[dq.back()] <= nums[i]) {
+                dq.pop_back();
+            }
+            dq.push_back(i);
+            if (i >= k - 1) {
+                result.push_back(nums[dq.front()]);
+            }
+        }
+        return result;
+    }
+};
+
 // 761. Special Binary String
 class Solution {
 public:
@@ -167,5 +190,48 @@ public:
             finalResult += str;
         }
         return finalResult; 
+    }
+};
+
+// 2858. Minimum Edge Reversals So Every Node Is Reachable
+class Solution {
+public:
+    vector<vector<pair<int, int>>> graph;
+    vector<int> ans;
+    int dfs(int node, int parent) {
+        int total = 0;
+        for (auto [nei, cost] : graph[node]) {
+            if (nei == parent)
+                continue;
+            total += cost;
+            total += dfs(nei, node);
+        }
+        return total;
+    }
+    void reroot(int node, int parent) {
+        for (auto [nei, cost] : graph[node]) {
+            if (nei == parent)
+                continue;
+            if (cost == 0) {
+                ans[nei] = ans[node] + 1;
+            }
+            else {
+                ans[nei] = ans[node] - 1;
+            }
+            reroot(nei, node);
+        }
+    }
+    vector<int> minEdgeReversals(int n, vector<vector<int>>& edges) {
+        graph.resize(n);
+        ans.resize(n);
+        for (auto& edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            graph[u].push_back({v, 0});
+            graph[v].push_back({u, 1});
+        }
+        ans[0] = dfs(0, -1);
+        reroot(0, -1);
+        return ans;
     }
 };

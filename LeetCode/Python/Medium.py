@@ -167,6 +167,19 @@ class Solution:
             suffix *= nums[i]
         return answer
 
+# 347. Top K Frequent Elements
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        freq = {}
+        for num in nums:
+            freq[num] = freq.get(num, 0) + 1
+        heap = []
+        for num, count in freq.items():
+            heapq.heappush(heap, (count, num))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        return [num for count, num in heap]
+
 # 560. Subarray Sum Equals K
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:

@@ -1,0 +1,70 @@
+-- Q1. Investments in 2016
+select round(sum(tiv_2016), 2) as tiv_2016
+from insurance
+where tiv_2015 in (
+    select tiv_2015
+    from insurance
+    group by tiv_2015
+    having count(*) > 1
+)
+and (lat, lon) in (
+    select lat, lon
+    from insurance
+    group by lat, lon
+    having count(*) = 1
+);
+
+-- Q2. Department Highest Salary
+select
+    d.name as department,
+    e.name as employee,
+    e.salary as salary
+from employee e
+join department d
+    on e.departmentid = d.id
+where (e.departmentid, e.salary) in (
+    select departmentid, max(salary)
+    from employee
+    group by departmentid
+);
+
+-- Q3. Product Sales Analysis III
+select
+    s.product_id,
+    s.year as first_year,
+    s.quantity,
+    s.price
+from sales s
+join (
+    select
+        product_id,
+        min(year) as first_year
+    from sales
+    group by product_id
+) f
+    on s.product_id = f.product_id
+    and s.year = f.first_year;
+
+-- Q4. Human Traffic of Stadium
+with high_traffic as (
+    select
+        id,
+        visit_date,
+        people,
+        id - row_number() over (order by id) as grp
+    from stadium
+    where people >= 100
+),
+grouped as (
+    select
+        *,
+        count(*) over (partition by grp) as cnt
+    from high_traffic
+)
+select
+    id,
+    visit_date,
+    people
+from grouped
+where cnt >= 3
+order by visit_date;
